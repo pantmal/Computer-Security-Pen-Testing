@@ -1,2 +1,11 @@
-work.php: 567 -> SQLI with id from url
-opencourses.php: 50 -> SQLI with fc from url (δυσκολο)
+
+---------SQLI-----------
+work.php: 567 -> with id from url
+phbb/*
+phpbb/viewtopic.php:89
+phpbb/newtopic.php:83
+phpbb/index.php
+phbb/reply.php
+forum_admin/forum_admin.php
+include/lib/main.lib.php:1213
+admin/editcours.php
