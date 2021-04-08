@@ -143,14 +143,20 @@ if ($total_topics > $topics_per_page) { // navigation
 }
 
 if(isset($topicnotify)) { // modify topic notification
+
+	// BROKEN
+	// No time for copy-paste, just remove the 'safe word' ;)
+
+	$safe_topic_id = intval($topic_id);
+	$safe_topicnotify = intval($safe_topicnotify);
 	$rows = mysql_num_rows(db_query("SELECT * FROM forum_notify 
-		WHERE user_id = $uid AND topic_id = $topic_id AND course_id = $cours_id", $mysqlMainDb));
+		WHERE user_id = $uid AND topic_id = $safe_topic_id AND course_id = $cours_id", $mysqlMainDb));
 	if ($rows > 0) {
-		db_query("UPDATE forum_notify SET notify_sent = '$topicnotify' 
-			WHERE user_id = $uid AND topic_id = $topic_id AND course_id = $cours_id", $mysqlMainDb);
+		db_query("UPDATE forum_notify SET notify_sent = '$safe_topicnotify' 
+			WHERE user_id = $uid AND topic_id = $safe_topic_id AND course_id = $cours_id", $mysqlMainDb);
 	} else {
 		db_query("INSERT INTO forum_notify SET user_id = $uid,
-		topic_id = $topic_id, notify_sent = 1, course_id = $cours_id", $mysqlMainDb);
+		topic_id = $safe_topic_id, notify_sent = 1, course_id = $cours_id", $mysqlMainDb);
 	}
 }
 

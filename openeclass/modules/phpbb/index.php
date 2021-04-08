@@ -85,20 +85,28 @@ if ($is_adminOfCourse || $is_admin) {
 }
 
 if(isset($forumcatnotify)) { // modify forum category notification
+
+	// BROKEN
+	// No time for copy-paste, just remove the 'safe word' ;)
+
+	$safe_cat_id = intval($cat_id);
+	$safe_forumcatnotify = intval($forumcatnotify);
+	$safe_forum_id = intval($forum_id); //??
+	$safe_forumnotify = intval($forumnotify);
 		$rows = mysql_num_rows(db_query("SELECT * FROM forum_notify 
-			WHERE user_id = $uid AND cat_id = $cat_id AND course_id = $cours_id", $mysqlMainDb));
+			WHERE user_id = $uid AND cat_id = $safe_cat_id AND course_id = $cours_id", $mysqlMainDb));
 		if ($rows > 0) {
-			db_query("UPDATE forum_notify SET notify_sent = '$forumcatnotify' 
-				WHERE user_id = $uid AND cat_id = $cat_id AND course_id = $cours_id", $mysqlMainDb);
+			db_query("UPDATE forum_notify SET notify_sent = '$safe_forumcatnotify' 
+				WHERE user_id = $uid AND cat_id = $safe_cat_id AND course_id = $cours_id", $mysqlMainDb);
 	} else {
 		db_query("INSERT INTO forum_notify SET user_id = $uid,
-		cat_id = $cat_id, notify_sent = 1, course_id = $cours_id", $mysqlMainDb);
+		cat_id = $safe_cat_id, notify_sent = 1, course_id = $cours_id", $mysqlMainDb);
 	}
 } elseif(isset($forumnotify)) { // modify forum notification
 	$rows = mysql_num_rows(db_query("SELECT * FROM forum_notify 
 		WHERE user_id = $uid AND forum_id = $forum_id AND course_id = $cours_id", $mysqlMainDb));
 	if ($rows > 0) {
-		db_query("UPDATE forum_notify SET notify_sent = '$forumnotify' 
+		db_query("UPDATE forum_notify SET notify_sent = '$safe_forumnotify' 
 			WHERE user_id = $uid AND forum_id = $forum_id AND course_id = $cours_id", $mysqlMainDb);
 	} else {
 		db_query("INSERT INTO forum_notify SET user_id = $uid,

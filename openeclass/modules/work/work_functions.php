@@ -104,7 +104,11 @@ function work_secret($id)
 function is_group_assignment($id)
 {
 	global $tool_content;
-	$res = db_query("SELECT group_submissions FROM assignments WHERE id = '$id'");
+	//BROKEN
+	// $res = db_query("SELECT group_submissions FROM assignments WHERE id = '$id'");
+
+	$safe_id = intval($id);
+	$res = db_query("SELECT group_submissions FROM assignments WHERE id = '$safe_id'");
 	if ($res) {
 		$row = mysql_fetch_row($res);
 		if ($row[0] == 0) {
@@ -207,14 +211,26 @@ function group_member_names($gid)
 function find_submission($uid, $id)
 {
 	global $tool_content;
+	//BROKEN
+	// if (is_group_assignment($id)) {
+	// 	$gid = user_group($uid);
+	// 	$res = db_query("SELECT id FROM assignment_submit
+	// 			WHERE assignment_id = '$safe_id'
+	// 			AND (uid = '$uid' OR group_id = '$gid')");
+	// } else {
+	// 	$res = db_query("SELECT id FROM assignment_submit
+	// 			WHERE assignment_id = '$safe_id' AND uid = '$uid'");
+	// }
+
+	$safe_id = intval($id);
 	if (is_group_assignment($id)) {
 		$gid = user_group($uid);
 		$res = db_query("SELECT id FROM assignment_submit
-				WHERE assignment_id = '$id'
+				WHERE assignment_id = '$safe_id'
 				AND (uid = '$uid' OR group_id = '$gid')");
 	} else {
 		$res = db_query("SELECT id FROM assignment_submit
-				WHERE assignment_id = '$id' AND uid = '$uid'");
+				WHERE assignment_id = '$safe_id' AND uid = '$uid'");
 	}
 	if ($res) {
 		$row = mysql_fetch_row($res);
@@ -258,8 +274,15 @@ function was_graded($uid, $id, $ret_val = FALSE)
 {
 	global $tool_content;
 	$gid = user_group($uid);
+	
+	//BROKEN
+	// $res = db_query("SELECT * FROM assignment_submit
+	// 		WHERE assignment_id = '$id'
+	// 		AND (uid = '$uid' OR group_id = '$gid')");
+
+	$safe_id = intval($id);
 	$res = db_query("SELECT * FROM assignment_submit
-			WHERE assignment_id = '$id'
+			WHERE assignment_id = '$safe_id'
 			AND (uid = '$uid' OR group_id = '$gid')");
 	if ($res) {
 		while ($row = mysql_fetch_array($res)) {

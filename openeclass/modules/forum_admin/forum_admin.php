@@ -304,11 +304,16 @@ if(isset($forumgo)) {
 		$tool_content .= "\n<p class=\"success_small\">$langForumDelete<br />
 			<a href=\"$_SERVER[PHP_SELF]?forumgo=yes&ctg=$ctg&cat_id=$cat_id\">$langBack</a></p>";
 	} else {
+
+		// BROKEN
+		// Remove safe
+
+		$safe_forumcatnotify = intval($forumcatnotify);
 		if(isset($forumcatnotify)) { // modify forum category notification
 			$rows = mysql_num_rows(db_query("SELECT * FROM forum_notify 
 				WHERE user_id = $uid AND cat_id = $cat_id AND course_id = $cours_id"));
 			if ($rows > 0) {
-				db_query("UPDATE forum_notify SET notify_sent = '$forumcatnotify' 
+				db_query("UPDATE forum_notify SET notify_sent = '$safe_forumcatnotify' 
 					WHERE user_id = $uid AND cat_id = $cat_id AND course_id = $cours_id");
 			} else {
 				db_query("INSERT INTO forum_notify SET user_id = $uid,

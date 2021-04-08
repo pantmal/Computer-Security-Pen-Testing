@@ -84,9 +84,17 @@ if (isset($_GET['all'])) {
         $paging = true;
 }
 
+//BROKEN
+// $sql = "SELECT f.forum_type, f.forum_name
+// 	FROM forums f, topics t 
+// 	WHERE (f.forum_id = '$forum') AND (t.topic_id = $topic) AND (t.forum_id = f.forum_id)";
+
+$safe_forum = intval($forum);
+$safe_topic = intval($topic);
+
 $sql = "SELECT f.forum_type, f.forum_name
 	FROM forums f, topics t 
-	WHERE (f.forum_id = '$forum') AND (t.topic_id = $topic) AND (t.forum_id = f.forum_id)";
+	WHERE (f.forum_id = '$safe_forum') AND (t.topic_id = $safe_topic) AND (t.forum_id = f.forum_id)";
 if (!$result = db_query($sql, $currentCourseID)) {
 	$tool_content .= $langErrorConnectForumDatabase;
 	draw($tool_content, 2);

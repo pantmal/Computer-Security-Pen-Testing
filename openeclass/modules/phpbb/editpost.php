@@ -214,9 +214,15 @@ if ($is_adminOfCourse) { // course admin
 		}
 	} else {
 		// Gotta handle private forums right here. They're naturally covered on submit, but not in this part.
+
+		// BROKEN
+		// Remove the safesss
+
+		$safe_forum = intval($forum);
+		$safe_topic = intval($topic);
 		$sql = "SELECT f.forum_type, f.forum_name, t.topic_title
 			FROM forums f, topics t
-			WHERE (f.forum_id = '$forum') AND (t.topic_id = $topic) AND (t.forum_id = f.forum_id)";
+			WHERE (f.forum_id = '$safe_forum') AND (t.topic_id = $safe_topic) AND (t.forum_id = f.forum_id)";
 		
 		if (!$result = db_query($sql, $currentCourseID)) {
 			$tool_content .= "$langTopicInformation";
@@ -271,11 +277,15 @@ if ($is_adminOfCourse) { // course admin
 				// Ok, looks like we're good.
 			}
 		}	
+
+		// BROKEN
+		// Remove safe
 		
+		$safe_post_id = intval($post_id);
 		$sql = "SELECT p.*, pt.post_text, t.topic_title, t.topic_notify, 
 			       t.topic_title, t.topic_notify 
 			FROM posts p, topics t, posts_text pt 
-			WHERE (p.post_id = '$post_id') AND (pt.post_id = p.post_id) AND (p.topic_id = t.topic_id)";
+			WHERE (p.post_id = '$safe_post_id') AND (pt.post_id = p.post_id) AND (p.topic_id = t.topic_id)";
 
 		if (!$result = db_query($sql, $currentCourseID)) {
 			$tool_content .= "<p>Couldn't get user and topic information from the database.</p>";

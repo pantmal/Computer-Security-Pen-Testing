@@ -564,8 +564,32 @@ function show_student_assignment($id)
 	global $tool_content, $m, $uid, $langSubmitted, $langSubmittedAndGraded, $langNotice3,
 	$langWorks, $langUserOnly, $langBack, $langWorkGrade, $langGradeComments;
 
+
+	//BROKEN
+	// $res = db_query("SELECT *, (TO_DAYS(deadline) - TO_DAYS(NOW())) AS days
+	// 	FROM assignments WHERE id = '$id'");
+
+	//PREPARE FAILURE
+	// error_reporting(E_ALL);
+	// ini_set('display_errors', 1);
+	// Create connection
+	// $conn = new mysqli('db', 'root', '1234', 'eclass');
+	// $sql = "SELECT *, (TO_DAYS(deadline) - TO_DAYS(NOW())) AS days
+	// FROM assignments WHERE id = ?"; // SQL with parameters
+	// if ($stmt = $conn->prepare($sql)){
+	// 	echo 'ok';
+	// } 
+	// else {
+	// 	die("Errormessage: ". $conn->error);
+	// }
+	// $stmt->bind_param("i", $idd);
+	//$stmt->execute();
+	//$result = $stmt->get_result(); // get the mysqli result
+	//$user = $result->fetch_assoc(); // fetch data   
+
+	$safe_id = intval($id); //temporal?
 	$res = db_query("SELECT *, (TO_DAYS(deadline) - TO_DAYS(NOW())) AS days
-		FROM assignments WHERE id = '$id'");
+		FROM assignments WHERE id = '$safe_id'"); 
 	$row = mysql_fetch_array($res);
 
 	$nav[] = array("url"=>"work.php", "name"=> $langWorks);

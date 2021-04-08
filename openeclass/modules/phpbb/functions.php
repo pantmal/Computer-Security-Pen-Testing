@@ -139,12 +139,26 @@ function get_last_post($id, $thedb, $type) {
  * users from simply editing the URL to post to a non-existant forum or topic
  */
 function does_exists($id, $thedb, $type) {
+	
+	//BROKEN
+	// switch($type) {
+	// 	case 'forum':
+	// 		$sql = "SELECT forum_id FROM forums WHERE forum_id = '$id'";
+	// 	break;
+	// 	case 'topic':
+	// 		$sql = "SELECT topic_id FROM topics WHERE topic_id = '$id'";
+	// 	break;
+	// }
+	
+	
+	$safe_id = intval($id);
+	
 	switch($type) {
 		case 'forum':
-			$sql = "SELECT forum_id FROM forums WHERE forum_id = '$id'";
+			$sql = "SELECT forum_id FROM forums WHERE forum_id = '$safe_id'";
 		break;
 		case 'topic':
-			$sql = "SELECT topic_id FROM topics WHERE topic_id = '$id'";
+			$sql = "SELECT topic_id FROM topics WHERE topic_id = '$safe_id'";
 		break;
 	}
 	if(!$result = db_query($sql, $thedb))

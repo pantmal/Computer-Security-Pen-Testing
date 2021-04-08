@@ -1209,7 +1209,12 @@ function ellipsize($string, $maxlen, $postfix = '...')
 function course_code_to_title($code)
 {
         global $mysqlMainDb;
-        $r = db_query("SELECT intitule FROM cours WHERE code='$code'", $mysqlMainDb);
+
+		//BROKEN
+		// $r = db_query("SELECT intitule FROM cours WHERE code='$code'", $mysqlMainDb);
+
+		$safe_code = mysql_real_escape_string($code);
+        $r = db_query("SELECT intitule FROM cours WHERE code='$safe_code'", $mysqlMainDb);
         if ($r and mysql_num_rows($r) > 0) {
                 $row = mysql_fetch_row($r);
                 return $row[0];
@@ -1222,8 +1227,12 @@ function course_code_to_title($code)
 // Find the course id of a course from its code
 function course_code_to_id($code)
 {
+		//BROKEN
+		//$r = db_query("SELECT cours_id FROM cours WHERE code='$code'", $mysqlMainDb);
+
         global $mysqlMainDb;
-        $r = db_query("SELECT cours_id FROM cours WHERE code='$code'", $mysqlMainDb);
+		$safe_code = mysql_real_escape_string($code);
+        $r = db_query("SELECT cours_id FROM cours WHERE code='$safe_code'", $mysqlMainDb);
         if ($r and mysql_num_rows($r) > 0) {
                 $row = mysql_fetch_row($r);
                 return $row[0];

@@ -76,6 +76,12 @@ include("functions.php");
 
 if (isset($post_id) && $post_id) {
 	// We have a post id, so include that in the checks..
+	
+	// BROKEN
+	// Wtf ...
+	
+	$safe_forum = intval($forum);
+	$safe_topic = intval($topic);
 	$sql  = "SELECT f.forum_type, f.forum_name, f.forum_access, t.topic_title ";
 	$sql .= "FROM forums f, topics t, posts p ";
 	$sql .= "WHERE (f.forum_id = '$forum') AND (t.topic_id = $topic)";
