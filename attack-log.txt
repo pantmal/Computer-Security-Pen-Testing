@@ -1,12 +1,11 @@
 
 ---------SQLI-----------
 work.php: 567 (and some others in work_functions) //fixed
-phbb/* 
 phpbb/viewtopic.php:89 //fixed
 phpbb/viewforum.php //fixed
 phpbb/newtopic.php:83 (and other lines) //fixed
-phpbb/index.php //cat fixed, not forum...
-phpbb/reply.php //unfixed, same problem with index (also fixed edit_post.php and functions.php)
+phpbb/index.php //fixed
+phpbb/reply.php //fixed (also fixed edit_post.php and functions.php)
 forum_admin/forum_admin.php //fixed
 include/lib/main.lib.php:1213 (called from unregcourse) //fixed
-include/lib/main.lib.php:1235 (called from admin/editcours) //foxed 
+include/lib/main.lib.php:1235 (called from admin/editcours) //fixed 

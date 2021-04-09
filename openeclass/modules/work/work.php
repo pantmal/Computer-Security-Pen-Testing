@@ -572,25 +572,22 @@ function show_student_assignment($id)
 	//PREPARE FAILURE
 	// error_reporting(E_ALL);
 	// ini_set('display_errors', 1);
-	// Create connection
-	// $conn = new mysqli('db', 'root', '1234', 'eclass');
+	// //Create connection
+	// $conn = new mysqli('db', 'root', '1234', 'TMA100' );
 	// $sql = "SELECT *, (TO_DAYS(deadline) - TO_DAYS(NOW())) AS days
 	// FROM assignments WHERE id = ?"; // SQL with parameters
-	// if ($stmt = $conn->prepare($sql)){
-	// 	echo 'ok';
-	// } 
-	// else {
-	// 	die("Errormessage: ". $conn->error);
-	// }
-	// $stmt->bind_param("i", $idd);
-	//$stmt->execute();
-	//$result = $stmt->get_result(); // get the mysqli result
-	//$user = $result->fetch_assoc(); // fetch data   
+	// $result = $conn->query($sql);
+	// if ($stmt = $conn->prepare($sql));
+	// $stmt->bind_param("i", $id);
+	// $stmt->execute();
+	
 
-	$safe_id = intval($id); //temporal?
+	$safe_id = intval($id); 
 	$res = db_query("SELECT *, (TO_DAYS(deadline) - TO_DAYS(NOW())) AS days
 		FROM assignments WHERE id = '$safe_id'"); 
 	$row = mysql_fetch_array($res);
+	//$res = $stmt->get_result(); // get the mysqli result
+	//$row = $res->fetch_assoc();
 
 	$nav[] = array("url"=>"work.php", "name"=> $langWorks);
 

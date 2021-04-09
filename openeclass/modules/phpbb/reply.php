@@ -78,20 +78,24 @@ if (isset($post_id) && $post_id) {
 	// We have a post id, so include that in the checks..
 	
 	// BROKEN
-	// Wtf ...
-	
+	// Just remove the safe's
+
 	$safe_forum = intval($forum);
 	$safe_topic = intval($topic);
+	$safe_post_id = intval($post_id);
+	
 	$sql  = "SELECT f.forum_type, f.forum_name, f.forum_access, t.topic_title ";
 	$sql .= "FROM forums f, topics t, posts p ";
-	$sql .= "WHERE (f.forum_id = '$forum') AND (t.topic_id = $topic)";
-	$sql .= " AND (p.post_id = $post_id) AND (t.forum_id = f.forum_id)";
+	$sql .= "WHERE (f.forum_id = '$safe_forum') AND (t.topic_id = $safe_topic)";
+	$sql .= " AND (p.post_id = $safe_post_id) AND (t.forum_id = f.forum_id)";
 	$sql .= " AND (p.forum_id = f.forum_id) AND (p.topic_id = t.topic_id)";
 } else {
+	$safe_forum = intval($forum);
+	$safe_topic = intval($topic);
 	// No post id, just check forum and topic.
 	$sql = "SELECT f.forum_type, f.forum_name, f.forum_access, t.topic_title ";
 	$sql .= "FROM forums f, topics t ";
-	$sql .= "WHERE (f.forum_id = '$forum') AND (t.topic_id = $topic) AND (t.forum_id = f.forum_id)";	
+	$sql .= "WHERE (f.forum_id = '$safe_forum') AND (t.topic_id = $safe_topic) AND (t.forum_id = f.forum_id)";	
 }
 
 $result = db_query($sql, $currentCourseID);
