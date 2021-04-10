@@ -119,7 +119,25 @@ if (!does_exists($forum, $currentCourseID, "forum") || !does_exists($topic, $cur
 	exit();
 }
 
-if (isset($submit) && $submit) {
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (isset($submit) && $submit && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// if (isset($submit) && $submit)
+// also remove the hidden input
+
+if (isset($submit) && $submit && $_POST['token'] === $token) {
 	if (trim($message) == '') {
 		$tool_content .= $langEmptyMsg;
 		draw($tool_content, 2, 'phpbb', $head_content);
@@ -317,6 +335,7 @@ if (isset($submit) && $submit) {
 	<input type='hidden' name='forum' value='$forum'>
 	<input type='hidden' name='topic' value='$topic'>
 	<input type='hidden' name='quote' value='$quote'>
+	<input type=\"hidden\" name=\"token\" value=\"$token\"/>
 	<input type='submit' name='submit' value='$langSubmit'>&nbsp;
 	<input type='submit' name='cancel' value='$langCancelPost'>
 	</td>

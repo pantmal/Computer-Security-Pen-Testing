@@ -130,6 +130,28 @@ hContent;
 // main program
 //-------------------------------------------
 
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if($is_adminOfCourse && isset($id) && isset($choice) && $choice == 'do_edit' && $_POST['token'] !== $token ) {
+	header('Location: http://localhost:8001/index.php');
+}
+
+if($is_adminOfCourse && isset($_POST['new_assign']) && $_POST['token'] !== $token ) {
+	header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// Change show_edit_assignment signature to ($id).
+// Change new_assignment signature to ()
+// Remove token check.
+// also remove the hidden input
 if ($is_adminOfCourse) {
 	if (isset($grade_comments)) {
 		$nameTools = $m['WorkView'];
@@ -138,12 +160,14 @@ if ($is_adminOfCourse) {
 	} elseif (isset($add)) {
 		$nameTools = $langNewAssign;
 		$navigation[] = array("url"=>"work.php", "name"=> $langWorks);
-		new_assignment();
+		new_assignment($token);
 	} elseif (isset($sid)) {
 		show_submission($sid);
 	} elseif (isset($_POST['new_assign'])) {
-		add_assignment($title, $comments, $desc, "$WorkEnd", $group_submissions);
-		show_assignments();
+		if($_POST['token'] === $token){
+			add_assignment($title, $comments, $desc, "$WorkEnd", $group_submissions);
+			show_assignments();
+		}
 	} elseif (isset($grades)) {
 		$nameTools = $m['WorkView'];
 		$navigation[] = array("url"=>"work.php", "name"=> $langWorks);
@@ -165,11 +189,14 @@ if ($is_adminOfCourse) {
 			} elseif ($choice == 'edit') {
 				$nameTools = $m['WorkEdit'];
 				$navigation[] = array("url"=>"work.php", "name"=> $langWorks);
-				show_edit_assignment($id);
+				show_edit_assignment($id, $token);
 			} elseif ($choice == 'do_edit') {
+
 				$nameTools = $m['WorkView'];
 				$navigation[] = array("url"=>"work.php", "name"=> $langWorks);
-				edit_assignment($id);
+				if($_POST['token'] === $token){
+					edit_assignment($id);
+				}
 			} elseif ($choice = 'plain') {
 				show_plain_view($id);
 			}
@@ -341,7 +368,7 @@ function submit_work($id) {
 
 
 //  assignment - prof view only
-function new_assignment()
+function new_assignment($token)
 {
 	global $tool_content, $m, $langAdd;
 	global $urlAppend;
@@ -395,6 +422,7 @@ function new_assignment()
     </tr>
     <tr>
       <th>&nbsp;</th>
+	  <input type=\"hidden\" name=\"token\" value=\"$token\"/>
       <td><input type='submit' name='new_assign' value='$langAdd' /></td>
     </tr>
     </tbody>
@@ -434,7 +462,7 @@ function date_form($day, $month, $year)
 }
 
 //form for editing
-function show_edit_assignment($id)
+function show_edit_assignment($id, $token)
 {
 	global $tool_content, $m, $langEdit, $langWorks, $langBack;
 	global $urlAppend;
@@ -508,6 +536,7 @@ cData;
     </tr>
     <tr>
       <th class='left'>&nbsp;</th>
+	  <input type=\"hidden\" name=\"token\" value=\"$token\"/>
       <td><input type='submit' name='do_edit' value='$langEdit' /></td>
     </tr>
     </tbody>

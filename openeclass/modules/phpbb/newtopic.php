@@ -106,7 +106,25 @@ if (!does_exists($forum, $currentCourseID, "forum")) {
 	$tool_content .= $langErrorPost;
 }
 
-if (isset($submit) && $submit) {
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (isset($submit) && $submit && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// if (isset($submit) && $submit)
+// also remove the hidden input
+
+if (isset($submit) && $submit && $_POST['token'] === $token ) {
 	$subject = strip_tags($subject);
 	if (trim($message) == '' || trim($subject) == '') {
 		$tool_content .= $langEmptyMsg;
@@ -242,6 +260,7 @@ if (isset($submit) && $submit) {
 	<tr>
 	<th>&nbsp;</th>
 	<td><input type='hidden' name='forum' value='$forum' />
+	<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
 	<input type='submit' name='submit' value='$langSubmit' />&nbsp;
 	<input type='submit' name='cancel' value='$langCancelPost' />
 	</td></tr>

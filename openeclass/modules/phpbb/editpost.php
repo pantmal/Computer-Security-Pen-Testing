@@ -77,8 +77,26 @@ include("functions.php"); // application logic for phpBB
 /******************************************************************************
  * Actual code starts here
  *****************************************************************************/
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if ($is_adminOfCourse && isset($submit) && $submit && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// if (isset($submit) && $submit)
+// also remove the hidden input
+
 if ($is_adminOfCourse) { // course admin 
-	if (isset($submit) && $submit) {
+	if (isset($submit) && $submit && $_POST['token'] === $token) {
 		$sql = "SELECT * FROM posts WHERE post_id = '$post_id'";
 		if (!$result = db_query($sql, $currentCourseID)) {
 			$tool_content .= $langErrorDataOne;
@@ -356,6 +374,7 @@ if ($is_adminOfCourse) { // course admin
 		<tr><th>&nbsp;</th><td>";
 		
 		$tool_content .= "
+		<input type=\"hidden\" name=\"token\" value=\"$token\"/>
 		<input type='hidden' name='post_id' value='$post_id' />
 		<input type='hidden' name='forum' value='$forum' />
 		<input type='submit' name='submit' value='$langSubmit' />

@@ -13,3 +13,9 @@ include/lib/main.lib.php:1235 (called from admin/editcours) //fixed
 ---------CSRF-----------
 profile.php //fixed
 auth/courses.php //pending
+newtopic.php //fixed
+phpbb/reply.php //fixed
+create_course/create_course.php //pending
+work.php:do_edit //fixed
+work.php:new_assign //fixed
+editpost.php //fixed
