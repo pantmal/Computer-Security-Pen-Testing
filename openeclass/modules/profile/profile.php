@@ -24,6 +24,8 @@
 *  			eMail: info@openeclass.org
 * =========================================================================*/
 
+//require_once '../../../csrf_token_generator.php';
+
 $require_help = TRUE;
 $require_login = true;
 $helpTopic = 'Profile';
@@ -37,7 +39,26 @@ $nameTools = $langModifProfile;
 check_guest();
 $allow_username_change = !get_config('block-username-change');
 
-if (isset($submit) && (!isset($ldap_submit)) && !isset($changePass)) {
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (isset($submit) && (!isset($ldap_submit)) && !isset($changePass) && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// if (isset($submit) && (!isset($ldap_submit)) && !isset($changePass)
+// also remove the hidden input
+
+if (isset($submit) && (!isset($ldap_submit)) && !isset($changePass) && $_POST['token'] === $token ) {
+
         if (!$allow_username_change) {
                 $username_form = $uname;
         }
@@ -302,6 +323,7 @@ if ((!isset($changePass)) || isset($_POST['submit'])) {
     </tr>
 	<tr>
       <th>&nbsp;</th>
+	  <input type=\"hidden\" name=\"token\" value=\"$token\"/>	
       <td><input type=\"Submit\" name=\"submit\" value=\"$langModify\"></td>
     </tr>
     </tbody>

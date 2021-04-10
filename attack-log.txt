@@ -9,3 +9,7 @@ phpbb/reply.php //fixed (also fixed edit_post.php and functions.php)
 forum_admin/forum_admin.php //fixed
 include/lib/main.lib.php:1213 (called from unregcourse) //fixed
 include/lib/main.lib.php:1235 (called from admin/editcours) //fixed 
+
+---------CSRF-----------
+profile.php //fixed
+auth/courses.php //pending
