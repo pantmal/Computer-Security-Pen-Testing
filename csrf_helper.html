@@ -2,19 +2,916 @@
 <html>
 <body>
 
-<h2>HTML Forms</h2>
+<h1>Welcome to CSRF Helper! This 'site' will be used in order to perform the various CSRF attacks. </h1>
+<h2>Every single form is taken and copy-pasted here. </h2>
 
-<form action="http://localhost:8001/modules/search/search.php" method='post'>
-  <label for="search_terms">First name:</label><br>
-  <input type="text" id="search_terms" name="search_terms" ><br>
-  <label for="submit.x">Last name:</label><br>
-  <input type="text" id="submit.x" name="submit.x" ><br><br>
-  <label for="submit.y">Last name:</label><br>
-  <input type="text" id="submit.y" name="submit.y" ><br><br>
-  <input type="submit" value="Submit">
+<h3> Change language form </h3>
+<!-- Switch to whatever different page may use this-->
+<form name="langform" action="http://localhost:8001/index.php" method="get" >
+  <select name='localize' onChange="document.langform.submit();" class='auth_input'>
+  <option selected value='el'>Ελληνικά</option>
+  <option value='en'>English</option>
+  <option value='es'>Español</option>
+  </select>
+</form>
+<br>
+
+<h3> Login form </h3>
+
+<form action="http://localhost:8001/index.php" method="post">
+  Όνομα χρήστη (username) <br>
+  <input class="Login" name="uname" size="20"><br>
+  Συνθηματικό (password) <br>
+  <input class="Login" name="pass" type="password" size="20"><br><br>
+  <input class="Login" name="submit" type="submit" size="20" value="Είσοδος"><br>
+  <br>
+</form>
+<br>
+
+<h3> Lost password form </h3>
+
+<form method="post" action="http://localhost:8001/modules/auth/lostpass.php">
+  <table>
+  <thead>
+  <tr><th>Όνομα χρήστη: </th>
+  <td>
+  <input type="text" name="userName" size="40">
+  </td>
+  </tr><tr>
+  <th>e-mail: </th>
+  <td>
+  <input type="text" name="email" size="40">
+  </td>
+  </tr></thead>
+  </table>
+  <br>
+  <input type="submit" name="doit" value="Αποστολή">
+</form>
+<br>
+
+<h3> Search form </h3>
+<!-- Switch to search_incourse.php when in course-->
+<form name="form1" id="form1" method="post" action="http://localhost:8001/modules/search/search.php"> <!-- theme.html -->
+  <input type="text" class="key" name="search_terms" size="14">
+  <input type="image" name="submit" class="ok" alt="Ok" src="/template/classic/img/go_button.gif">
+  <br>
 </form> 
+<br>
 
-<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+<h3> Advanced search form </h3>
+
+<form method="post" action="http://localhost:8001/modules/search/search.php">
+  <table width="99%">
+      <tbody>
+  <tr>
+        <th class="left" width="120">&nbsp;</th>
+    <td><b>Κριτήρια Αναζήτησης</b></td>
+      </tr>
+  <tr>
+        <th class="left">Τίτλος</th>
+    <td width="250"><input class="FormData_InputText" name="search_terms_title" type="text" size="50"></td>
+    <td><small>αφορά τον τίτλο ή τμήμα από τον τίτλο του μαθήματος</small></td>
+      </tr>
+  <tr>
+        <th class="left">Λέξεις κλειδιά</th>
+    <td><input class="FormData_InputText" name="search_terms_keywords" type="text" size="50"></td>
+    <td><small>κάποια λέξη ή οι λέξεις κλειδιά που προσδιορίζουν τη θεματική περιοχή του μαθήματος</small></td>	</tr>
+  <tr>
+    <th class="left">Εκπαιδευτής
+    </th><td><input class="FormData_InputText" name="search_terms_instructor" type="text" size="50"></td>
+    <td><small>το όνομα ή τα ονόματα των καθηγητών του μαθήματος</small></td>
+  </tr>
+  <tr>
+    <th class="left">Μάθημα (Κωδικός)
+    </th><td><input class="FormData_InputText" name="search_terms_coursecode" type="text" size="50"></td>
+    <td><small>ο κωδικός του μαθήματος</small></td>
+  </tr>
+  <tr>
+        <th>&nbsp;</th>
+    <td colspan="2"><input type="Submit" name="submit" value="Εκτέλεση Αναζήτησης">&nbsp;&nbsp;<input type="Reset" name="reset" value="Νέα Αναζήτηση"></td>
+  </tr>
+      </tbody><tbody>
+      </tbody></table>
+</form>
+<br>
+
+<h3> Search in course form</h3>
+<form method="post" action="http://localhost:8001/modules/search/search_incourse.php">
+	<table width="99%">
+    <tbody>
+	<tr>
+      <th width="120" class='left'>&nbsp;</th>
+	  <td><b>Κριτήρια Αναζήτησης</b></td>
+    </tr>
+    <tr>
+      <th class='left'>Τουλάχιστον έναν από τους όρους</th>
+	  <td colspan="2"><input class='FormData_InputText' name="or_search_terms" type="text" size="80"/></td>
+	</tr>
+	<tr>
+	  <th width="30%" class='left' valign="top" rowspan="4">Αναζήτηση σε: </th>
+	  <td width="35%"><input type="checkbox" name="subsystems[]" value="7" checked="checked" />Ανακοινώσεις</td>
+	  <td width="35%"><input name="subsystems[]" type="checkbox" value="1" checked="checked" />Ατζέντα</td>
+    </tr>
+	<tr>
+	  <td><input type="checkbox" name="subsystems[]" value="20" checked="checked" />Περιγραφή Μαθήματος</td>
+      <td><input name="subsystems[]" type="checkbox" value="3" checked="checked" />Έγγραφα</td>
+    </tr>
+	<tr>
+	  <td><input type="checkbox" name="subsystems[]" value="9" checked="checked" />Περιοχές Συζητήσεων</td>
+      <td><input type="checkbox" name="subsystems[]" value="10" checked="checked" />Ασκήσεις</td>
+    </tr>
+	<tr>
+	  <td><input name="subsystems[]" type="checkbox" value="4" checked="checked" />Βίντεο</td>
+      <td><input name="subsystems[]" type="checkbox" value="2" checked="checked" />Σύνδεσμοι</td>
+    </tr>
+	<tr>
+	  <th>&nbsp;</th>
+	  <td colspan="2"><input type="Submit" name="submit" value="Εκτέλεση Αναζήτησης" />&nbsp;<input type="Submit" name="submit" value="Νέα Αναζήτηση" /></td>
+    </tr>
+	</tbody>
+    </table>
+</form>
+
+<br>
+
+
+<h3> New user form </h3>
+
+<form action="http://localhost:8001/modules/auth/newuser.php" method="post">
+	<table style="border: 1px solid #edecdf;" width="99%">
+	<thead>
+	<tr>
+	<td>
+	<table class="FormData" width="100%" align="left">
+	<thead>
+	<tr>
+	<th class="left" width="220">Όνομα</th>
+	<td colspan="2"><input type="text" name="prenom_form" value="" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+	</tr>
+	<tr>
+	<th class="left">Επώνυμο</th>
+	<td colspan="2"><input type="text" name="nom_form" value="" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+	</tr>
+	<tr>
+	<th class="left">Όνομα χρήστη (username)</th>
+	<td colspan="2"><input type="text" name="uname" value="" size="20" maxlength="20" class="FormData_InputText">&nbsp;&nbsp;<small>(*) (μέχρι 20 χαρακτήρες)</small></td>
+	</tr>
+	<tr>
+	<th class="left">Συνθηματικό (password)</th>
+	<td colspan="2"><input type="password" name="password1" size="20" maxlength="20" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+	</tr>
+	<tr>
+	<th class="left">Επιβεβαίωση συνθηματικού</th>
+	<td colspan="2"><input type="password" name="password" size="20" maxlength="20" class="FormData_InputText">&nbsp;&nbsp;<small>(*) (μέχρι 20 χαρακτήρες)</small></td>
+	</tr>
+	<tr>
+	<th class="left">email</th>
+	<td valign="top"><input type="text" name="email" value="" class="FormData_InputText"></td>
+	<td><small>Το e-mail δεν είναι απαραίτητο, αλλά χωρίς αυτό δε θα μπορείτε να λαμβάνετε
+ανακοινώσεις, ούτε θα μπορείτε να χρησιμοποιήσετε τη λειτουργία υπενθύμισης συνθηματικού.</small></td>
+	</tr>
+	<tr>
+	<th class="left">Αριθμός μητρώου</th>
+	<td colspan="2" valign="top"><input type="text" name="am" value="" class="FormData_InputText"></td>
+	</tr>
+	<tr>
+	<th class="left">Σχολή / Τμήμα</th>
+		<td colspan="2"><select name="department">
+<option value="1">Τμήμα 1</option>
+<option value="2">Τμήμα 2</option>
+<option value="3">Τμήμα 3</option>
+<option value="4">Τμήμα 4</option>
+<option value="6">Τμήμα 5</option>
+</select>
+	</td>
+	</tr>
+	<tr>
+	<th class="left">Γλώσσα</th>
+	<td width="1">
+<select name="localize" class="auth_input">
+<option selected="" value="el">Ελληνικά</option>
+<option value="en">English</option>
+<option value="es">Español</option>
+</select>
+</td>
+	<td><small>Επιλέξτε την γλώσσα στην οποία θα εμφανίζονται τα μηνύματα της πλατφόρμας.</small></td>
+	</tr>
+	<tr>
+	<th class="left">&nbsp;</th>
+	<td colspan="2">
+	<input type="hidden" name="auth" value="1">
+	<input type="submit" name="submit" value="Εγγραφή">
+	</td>
+	</tr>
+	</thead>
+	</table>
+	<div align="right"><small>Τα πεδία με (*) είναι υποχρεωτικά</small></div>
+	</td>
+	</tr>
+	</thead>
+	</table>
+</form>
+<br>
+
+<h3> New teacher form</h3>
+
+<form action="http://localhost:8001/modules/auth/newprof.php" method="post">
+  <table style="border: 1px solid #edecdf;" width="99%">
+  <thead>
+  <tr>
+    <td>
+    <table class="FormData" width="99%" align="left">
+    <thead>
+    <tr>
+     <th class="left" width="220">Επώνυμο</th>
+     <td><input size="35" type="text" name="nom_form" value="" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+    </tr>
+    <tr>
+      <th class="left">Όνομα</th>
+      <td><input size="35" type="text" name="prenom_form" value="" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+    </tr>
+    <tr>
+      <th class="left">Τηλέφωνο</th>
+      <td><input size="35" type="text" name="userphone" value="" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+    </tr>
+    <tr>
+      <th class="left">Όνομα χρήστη (username)</th>
+      <td><input size="35" type="text" name="uname" value="" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+    </tr>
+    <tr>
+      <th class="left">email</th>
+      <td><input size="35" type="text" name="email_form" value="" class="FormData_InputText">&nbsp;&nbsp;<small>(*)</small></td>
+    </tr>
+    <tr>
+      <th class="left">Σχόλια
+      </th><td><textarea name="usercomment" cols="32" rows="4" class="FormData_InputText" wrap="SOFT"></textarea>&nbsp;&nbsp;<small>(*) Αναφέρατε τους λόγους χρήσης της πλατφόρμας</small></td>
+    </tr>
+    <tr>
+      <th class="left">Σχολή / Τμήμα</th>
+      <td><select name="department"><option value="1">Τμήμα 1</option>
+  <option value="2">Τμήμα 2</option>
+  <option value="3">Τμήμα 3</option>
+  <option value="4">Τμήμα 4</option>
+  <option value="6">Τμήμα 5</option>
+  </select>
+      </td>
+    </tr>
+  <tr>
+        <th class="left">Γλώσσα</th>
+        <td>
+  <select name="proflang" class="auth_input">
+  <option selected="" value="el">Ελληνικά</option>
+  <option value="en">English</option>
+  <option value="es">Español</option>
+  </select>
+  </td>
+      </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <td>
+        <input type="submit" name="submit" value="Υποβολή Αίτησης">
+        <input type="hidden" name="auth" value="1">
+      </td>
+    </tr>
+    </thead>
+    </table>
+      <div align="right"><small>Τα πεδία με (*) είναι υποχρεωτικά</small></div>
+    </td>
+  </tr>
+  </thead>
+  </table>
+  
+</form>
+<br>
+
+<h3> Edit profile form </h3>
+
+<form method="post" action="http://localhost:8001/modules/profile/profile.php?submit=yes"><br>
+  <table width="99%">
+  <tbody><tr>
+     <th class="left" width="220">Όνομα</th><td><input class="FormData_InputText" type="text" size="40" name="prenom_form" value="Διαχειριστής"></td></tr>
+  <tr>
+     <th class="left">Επώνυμο</th><td><input class="FormData_InputText" type="text" size="40" name="nom_form" value="Πλατφόρμας"></td></tr><tr>
+     <th class="left">Όνομα χρήστη (username)</th>
+     <td><input class="FormData_InputText" type="text" size="40" name="username_form" value="drunkadmin"></td>
+  </tr><tr><th class="left">email</th><td><input class="FormData_InputText" type="text" size="40" name="email_form" value="webmaster@localhost"></td></tr><tr>
+      <th class="left">Αριθμός μητρώου</th>
+      <td><input class="FormData_InputText" type="text" size="40" name="am_form" value=""></td>
+  </tr><tr><th class="left">Αλλαγή εμφάνισης χαρτοφυλακίου</th><td>
+  <input class="FormData_InputText" type="radio" name="persoStatus" value="no">Αναλυτικό&nbsp;
+  <input class="FormData_InputText" type="radio" name="persoStatus" value="yes" checked="">Συνοπτικό
+  </td>
+  </tr>
+  <tr>
+    <th class="left">Γλώσσα</th>
+    <td>
+      
+<select name="userLanguage" class="auth_input">
+<option selected="" value="el">Ελληνικά</option>
+<option value="en">English</option>
+<option value="es">Español</option>
+</select>
+
+    </td>
+  </tr>
+<tr>
+    <th>&nbsp;</th>
+    <td><input type="Submit" name="submit" value="Αλλαγή"></td>
+  </tr>
+  </tbody>
+  </table>
+</form>
+<br>
+
+<h3> Change password form </h3>
+
+<form method="post" action="http://localhost:8001/modules/profile/password.php?submit=yes&amp;changePass=do">
+  <table width="99%">
+  <tbody>
+  <tr>
+    <th class="left" width="220">Παρόν συνθηματικό</th>
+    <td><input class="FormData_InputText" type="password" size="40" name="old_pass" value=""></td>
+    </tr>
+   <tr>
+     <th class="left">Νέο συνθηματικό</th>
+     <td><input class="FormData_InputText" type="password" size="40" name="password_form" value=""></td>
+   </tr>
+   <tr>
+     <th class="left" width="150">Νέο συνθηματικό (ξανά)</th>
+     <td><input class="FormData_InputText" type="password" size="40" name="password_form1" value=""></td>
+    </tr>
+	<tr>
+      <th>&nbsp;</th>
+      <td><input type="Submit" name="submit" value="Αλλαγή"></td>
+    </tr>
+	</tbody>
+    </table>
+</form>
+<br>
+
+<h3> Select department form</h3>
+
+<form name='depform' action='http://localhost:8001/modules/auth/courses.php' method='get'>
+  <div id='operations_container'>
+    <ul id='opslist'>
+    <li>Επιλογή Σχολής / Τμήματος:&nbsp;
+<select name='fc' onChange="document.depform.submit();" class='auth_input'>
+<option selected value='1'>Τμήμα 1</option>
+<option value='2'>Τμήμα 2</option>
+<option value='3'>Τμήμα 3</option>
+<option value='4'>Τμήμα 4</option>
+<option value='6'>Τμήμα 5</option>
+</select>
+
+    </li>
+    </ul>
+  </div>
+</form>
+<br>
+
+<h3> Enroll to course form</h3>
+
+<form action='http://localhost:8001/modules/auth/courses.php' method='post'><table width='99%' align='left'><tbody>
+  <tr><td><a name='top'> </a>Σχολή / Τμήμα: <b>Τμήμα 1</b>&nbsp;&nbsp;</td></tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<br />
+<table width='99%'>
+<thead>
+<tr>
+<td><a name='pre'></a><b>Προπτυχιακά</b></td>
+<td>&nbsp;</td>
+</tr>
+</thead>
+</table>
+<table width='99%' class='framed'>
+<tr>
+<td>
+<script type='text/javascript' src='sorttable.js'></script>
+<table class='sortable' id='t1pre' width='100%'>
+<thead>
+<tr>
+<th width='10%'>Εγγραφή</th>
+<th class='left'>Μάθημα (Κωδικός)</th>
+<th class='left' width='23%'>Εκπαιδευτής</th>
+<th width='7%'><b>Τύπος</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td width='10%' align='center'><input type='checkbox' name='selectCourse[]' value='1' checked='checked' /><input type='hidden' name='changeCourse[]' value='1' /></td>
+<td width=60%><b><a href='../../courses/TMA100/' target='_blank'>HyperSecurity</a></b> <small>(TMA100)</small></td>
+<td width=23%>Διαχειριστής Πλατφόρμας</td>
+<td align='center' width='7%'><img src='../../template/classic/img/OpenCourse.gif' alt='' /></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+<br />
+<table width='99%' class='framed' align='left'>
+<tbody>
+<tr>
+<td><input class='Login' type='submit' name='submit' value='Εγγραφή' /></td>
+</tr>
+</tbody>
+</table>
+</form>
+<br>
+
+<h3> File submit form</h3>
+
+<form method="post" action="http://localhost:8001/modules/dropbox/dropbox_submit.php" enctype="multipart/form-data" onsubmit="return checkForm(this)">
+  <table width='99%' class='FormData'>
+  <tbody>
+  <tr>
+    <th class='left' width='220'>&nbsp;</th>
+    <td><b>Ανέβασμα αρχείου</b></td>
+  </tr>
+  <tr>
+    <th class='left'>Αρχείο :</th>
+    <td><input type='file' name='file' size='35' />
+        <input type='hidden' name='dropbox_unid' value='fdb2d259165bb7fcbaac33c991fbaf60' />
+    </td>
+  </tr>
+  <tr>
+    <th class='left'>Αποστολέας :</th>
+    <td><input type='text' name='authors' value='Mal Pant' size='40' class='FormData_InputText' /></td>
+  </tr>
+  <tr>
+    <th class='left'>Περιγραφή αρχείου :</th>
+    <td><textarea name='description' cols='37' rows='2' class='FormData_InputText'></textarea></td>
+  </tr>
+  <tr>
+    <th class='left'>Αποστολή στον/στην :</th>
+    <td>
+      <select name='recipients[]' size='3' multiple='true'  class='auth_input'>
+         <option value=1>Πλατφόρμας Διαχειριστής</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <td><input type='Submit' name='submitWork' value='Αποστολή' /></td>
+  </tr>
+  </tbody>
+  </table>
+</form>
+<br>
+
+<h3> Project submit form</h3>
+
+<form enctype="multipart/form-data" action="http://localhost:8001/modules/work/work.php" method="post">
+  <input type="hidden" name="id" value="1" />
+  <br />
+  <table width="99%" align="left" class="FormData">
+  <tbody>
+  <tr>
+    <th width="220">&nbsp;</th>
+    <td><b>Υποβολή</b></td>
+  </tr>
+  <tr>
+    <th class="left">Αρχείο:</th>
+    <td><input type="file" name="userfile" class="FormData_InputText" /></td>
+  </tr>
+  <tr>
+    <th class="left">Σχόλια:</th>
+    <td><textarea name="stud_comments" rows="5" cols="55" class="FormData_InputText"></textarea></td>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <td><input type="submit" value="Υποβολή" name="work_submit" /><br />Αν στείλετε κάποιο άλλο αρχείο, το αρχείο που υπάρχει
+αυτή τη στιγμή θα διαγραφεί και θα αντικατασταθεί με το νέο.</td>
+  </tr>
+  </tbody>
+  </table>
+  <br/>
+</form>
+<br>
+
+<h3> New topic form</h3>
+
+<form action='http://localhost:8001/modules/phpbb/newtopic.php' method='post'>
+	<table class='FormData' width='99%'>
+	<tbody>
+	<tr>
+	<th width='220'>&nbsp;</th>
+	<td><b>Στοιχεία θέματος</b></td>
+	</tr>
+	<tr>
+	<th class='left'>Θέμα:</th>
+	<td><input type='text' name='subject' size='53' maxlength='100' class='FormData_InputText' /></td>
+	</tr>
+	<tr>
+	<th class='left'>Σώμα μηνύματος:</th>
+	<td>
+	<table class='xinha_editor'>
+	<tr>
+	<td><textarea id='xinha' name='message' rows='14' cols='50' class='FormData_InputText'></textarea></td>
+	</tr></table>
+	</td>
+	</tr>
+	<tr>
+	<th>&nbsp;</th>
+	<td><input type='hidden' name='forum' value='1' />
+	<input type='submit' name='submit' value='Υποβολή' />&nbsp;
+	<input type='submit' name='cancel' value='Ακύρωση αποστολής' />
+	</td></tr>
+	</tbody>
+	</table>
+	<br/>
+</form>
+<br>
+
+<h3> Reply to topic form</h3>
+
+<form action='http://localhost:8001/modules/phpbb/reply.php' method='post'>
+	<table class="FormData" width="99%">
+	<tbody>
+	<tr>
+	<th width="220">&nbsp;</th>
+	<td><b>Απάντηση στο θέμα συζήτησης</b>: New Topic</td>
+	</tr>
+	<tr>
+        <th class="left">Σώμα μηνύματος:</th><td valign='top'>
+	<table class='xinha_editor'>
+	<tr>
+	<td>
+	<textarea id='xinha' name='message' rows='15' cols='70' class='auth_input'></textarea></td>
+	</tr></table></td>
+	</tr>
+	<tr>
+	<th>&nbsp;</th>
+	<td>
+	<input type='hidden' name='forum' value='1'>
+	<input type='hidden' name='topic' value='1'>
+	<input type='hidden' name='quote' value=''>
+	<input type='submit' name='submit' value='Υποβολή'>&nbsp;
+	<input type='submit' name='cancel' value='Ακύρωση αποστολής'>
+	</td>
+	</tr>
+	</tbody></table>
+</form>
+<br/>
+
+<h3> Message form</h3>
+
+<form name='chatForm' action='http://localhost:8001/modules/conference/messageList.php' method='get' target='messageList' onSubmit='return prepare_message();'>
+  <table width='99%' class='FormData'>
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <td>
+
+      <b>Πληκτρολογήστε το μήνυμά σας παρακάτω</b><br />
+      <input type='text' name='msg' size='80'style='border: 1px solid #CAC3B5; background: #fbfbfb;'>
+      <input type='hidden' name='chatLine'>
+      <input type='submit' value=' >> '>
+
+    </td>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <!-- <td><iframe frameborder='0' src='http://localhost:8001/modules/conference/messageList.php' width='100%' height='300' name='messageList' style='background: #fbfbfb; border: 1px solid #CAC3B5;'><a href='http://localhost:8001/modules/conference/messageList.php'>Message list</a></iframe></td> -->
+  </tr>
+  </thead>
+  </table>
+</form>
+<br>
+
+<h3>Create course form (Warning: missing steps!)</h3>
+
+<form method='post' name='createform' action='http://localhost:8001/modules/create_course/create_course.php' onsubmit="return checkrequired(this, 'intitule', 'titulaires');"><table width="99%" align='left' class='FormData'>
+	<tbody>
+	<tr>
+	<th width="220">&nbsp;</th>
+	<td><b>Βασικά στοιχεία και πληροφορίες μαθήματος</b></td>
+	<td>&nbsp;</td>
+	</tr>
+	<tr>
+	<th class='left' width="160">Τίτλος&nbsp;:</th>
+	<td width="160"><input class='FormData_InputText' type='text' name='intitule' size='60' value='' /></td>
+	<td><small>π.χ. <i>Ιστορία της Τέχνης</i></small></td>
+	</tr>
+	<tr>
+	<th class='left'>Σχολή / Τμήμα&nbsp;:</th>
+	<td>
+<select name='faculte'  class='auth_input'>
+<option value='1'>Τμήμα 1</option>
+<option value='2'>Τμήμα 2</option>
+<option value='3'>Τμήμα 3</option>
+<option value='4'>Τμήμα 4</option>
+<option value='6'>Τμήμα 5</option>
+</select>
+</td><td>&nbsp;</td></tr><tr>
+	<th class='left'>Εκπαιδευτές&nbsp;:</th>
+	<td><input class='FormData_InputText' type='text' name='titulaires' size='60' value='Διαχειριστής Πλατφόρμας' /></td>
+	<td>&nbsp;</td></tr>
+	<tr>
+	<th class='left'>Τύπος&nbsp;:</th>
+	<td> 
+<select name='type'  class='auth_input'>
+<option value='pre'>Προπτυχιακό</option>
+<option value='post'>Μεταπτυχιακό</option>
+<option value='other'>Άλλο</option>
+</select>
+ 
+	</td>
+	<td>&nbsp;</td></tr>
+	<tr>
+	<th class='left'>Γλώσσα&nbsp;:</th>
+	<td>
+<select name='languageCourse'  class='auth_input'>
+<option selected value='el'>Ελληνικά</option>
+<option value='en'>English</option>
+<option value='es'>Español</option>
+</select>
+</td><td>&nbsp;</td></tr>
+	<tr><th>&nbsp;</th>
+	<td><input type='submit' name='create2' value='Επόμενο βήμα >' /><input type='hidden' name='visit' value='true' /></td>
+	<td><p align='right'><small>(*) &nbsp;Όλα τα πεδία είναι υποχρεωτικά!</small></p></td>
+</tbody>
+</table><br /></form>
+<br>
+
+<h3>Create Project form</h3>
+
+<form action='http://localhost:8001/modules/work/work.php' method='post' onsubmit='return checkrequired(this, "title");'>
+  <table width='99%' class='FormData'>
+  <tbody>
+  <tr>
+    <th width='220'>&nbsp;</th>
+    <td><b>Στοιχεία εργασίας</b></td>
+  </tr>
+  <tr>
+    <th class='left'>Τίτλος:</th>
+    <td><input type='text' name='title' size='55' class='FormData_InputText' /></td>
+  </tr>
+  <tr>
+    <th class='left'>Περιγραφή:</th>
+    <td>
+      <table class='xinha_editor'>
+      <tr>
+        <td><textarea id='xinha' name='desc' style='width:100%'></textarea></td>
+      </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <th class='left'>Σχόλια:</th>
+    <td><textarea name='comments' rows='3' cols='53' class='FormData_InputText'></textarea></td>
+  </tr>
+  <tr>
+    <th class='left'>Προθεσμία υποβολής:</th>
+    <td><input style="width: 100px; color: #840; font-weight:bold; font-size:10px; background-color: #fff; border: 1px dotted #000; text-align: center" name="WorkEnd" value="2021-06-10" id="f-calendar-field-1" type="text" /><a href="#" id="f-calendar-trigger-1"><img align="middle" border="0" src="http://localhost:8001/include/jscalendar/img.gif" alt="" /></a><script type="text/javascript">Calendar.setup({"ifFormat": "%Y-%m-%d","daFormat": "%Y/%m/%d","showsTime":false,"showOthers":true,"timeFormat":24,"inputField": "f-calendar-field-1","button": "f-calendar-trigger-1"});</script></td>
+  </tr>
+  <tr>
+    <th class='left'>Τύπος εργασίας:</th>
+    <td><input type='radio' name='group_submissions' value='0' checked='1' />Ατομική
+    <br /><input type='radio' name='group_submissions' value='1' />Ομαδική</td>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <td><input type='submit' name='new_assign' value='Προσθήκη' /></td>
+  </tr>
+  </tbody>
+  </table>
+</form>
+<br>
+
+<h3> Edit Project form</h3>
+
+<form action="http://localhost:8001/modules/work/work.php" method="post" onsubmit="return checkrequired(this, 'title');">
+  <input type="hidden" name="id" value="1" />
+  <input type="hidden" name="choice" value="do_edit" />
+  <table width="99%" class="FormData">
+  <tbody>
+  <tr>
+    <th width="150">&nbsp;</th>
+    <td><b>Στοιχεία εργασίας</b></td>
+  </tr>
+  <tr>
+    <th class="left">Τίτλος:</th>
+    <td><input type="text" name="title" size="45" value="Project1" class='FormData_InputText' /></td>
+  </tr>
+  <tr>
+    <th class="left">Περιγραφή:</th>
+    <td>
+      <table class='xinha_editor'>
+      <tr>
+        <td><textarea id='xinha' name='desc' value='Super hard project&lt;br /&gt;' style='width:100%'>Super hard project<br /></textarea></td>
+      </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <th class="left">Σχόλια:</th>
+    <td><textarea name="comments" rows="5" cols="65" class='FormData_InputText'>nothing</textarea></td>
+  </tr>
+  <tr>
+    <th class="left">Προθεσμία υποβολής:</th>
+    <td><input style="width: 100px; color: #840; font-weight:bold; font-size:10px; background-color: #fff; border: 1px dotted #000; text-align: center" name="WorkEnd" value="2021-05-31" id="f-calendar-field-2" type="text" /><a href="#" id="f-calendar-trigger-2"><img align="middle" border="0" src="http://localhost:8001/include/jscalendar/img.gif" alt="" /></a><script type="text/javascript">Calendar.setup({"ifFormat": "%Y-%m-%d","daFormat": "%Y/%m/%d","showsTime":false,"showOthers":true,"timeFormat":24,"inputField": "f-calendar-field-2","button": "f-calendar-trigger-2"});</script>
+    </td>
+  </tr>
+  <tr>
+    <th class='left'>Τύπος εργασίας:</th>
+    <td><input type='radio' name='group_submissions' value='0' checked='1' />Ατομική<br /><input type='radio' name='group_submissions' value='1' />Ομαδική</td>
+  </tr>
+  <tr>
+    <th class='left'>&nbsp;</th>
+    <td><input type='submit' name='do_edit' value='Διόρθωση' /></td>
+  </tr>
+  </tbody>
+  </table>
+</form>
+<br>
+
+<h3> Forum Category edit form </h3>
+
+<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumadmin=yes" method=post></td><tr><td><table width=99% class="ForumCategory">
+  <tbody>
+  <tr><th width='2%'>Α/Α</th>
+    <th><div align='left'>Κατηγορίες περιοχών συζητήσεων</div></th>
+    <th width='5%'>Πλήθος συζητήσεων</th>
+    <th width='10%'>Ενέργειες</th>
+  </tr>
+<tr class="odd">
+<td><div align='right'>1.</div></td>
+      <td><div align='left'>Αρχή &nbsp;</div></td>
+      <td><div align='center'>1</div></td>
+      <td><a href='forum_admin.php?forumgo=yes&cat_id=2&ctg=Αρχή'>
+<img src='../../template/classic/img/forum_on.gif' border='0' title='Περιοχές Συζητήσεων'></img></a>&nbsp;
+<a href='/modules/forum_admin/forum_admin.php?forumcatedit=yes&cat_id=2'>
+<img src='../../template/classic/img/edit.gif' border='0' title='Αλλαγή'></img></a>&nbsp;
+<a href='/modules/forum_admin/forum_admin.php?forumcatdel=yes&cat_id=2&ok=0' onClick='return confirmation();'>
+<img src='../../template/classic/img/delete.gif' border='0' title='Διαγραφή'></img></a>
+<a href='/modules/forum_admin/forum_admin.php?forumcatnotify=1&cat_id=2'>	
+<img src='../../template/classic/img/announcements_off.gif' border='0' title='Ειδοποίηση μέσω email αν σταλούν απαντήσεις'></img></a>
+</td></tr></tbody></table></form><br/>
+
+<h3>New Category form</h3>
+
+<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumcatadd=yes" method=post onsubmit="return checkrequired(this,'catagories');">
+  <table width=99% class="FormData" align="left">
+  <tbody><tr>
+  <th width='220'>&nbsp;</th>
+  <td><b>Προσθήκη κατηγορίας</b></td>
+  </tr>
+  <tr>
+  <th class='left'>Κατηγορία</th>
+  <td><input type=text name=catagories size=50 class='FormData_InputText'></td>
+  </tr>
+  <tr><th>&nbsp;</th>
+  <td><input type=hidden name=forumcatadd value=yes><input type=submit value='Προσθήκη'></td>
+  </tr>
+  </thead>
+  </table></form>
+<br/>
+
+<h3> Forum Category Topic edit form </h3>
+
+<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumgoadd=yes&ctg=Αρχή&cat_id=2" method=post>
+  <table width=99% class="ForumAdmSum">
+  <tbody>
+  <tr class="odd">
+  <td colspan="4"><small>Περιοχές συζητήσεων της κατηγορίας: <b>Αρχή</b></small></td>
+  </tr>
+  <tr>
+  <th width='10'>Α/Α</th>
+  <th>Όνομα περιοχής συζητήσεων</th>
+  <th>Περιγραφή</th>
+  <th width='75'><div align="center">Ενέργειες</div></th>
+  </tr>
+  <tbody>
+<tr><td align='right'>1.</td>
+      <td align='left'>Γενικές συζητήσεις</td>
+      <td align='left'>Περιοχή συζητήσεων για κάθε θέμα που αφορά το μάθημα&nbsp;</td>
+<td align='center'>
+      <a href='/modules/forum_admin/forum_admin.php?forumgoedit=yes&forum_id=1&ctg=Αρχή&cat_id=2'>
+      <img src='../../template/classic/img/edit.gif' title='Αλλαγή' border='0'></img></a>&nbsp;
+      <a href='/modules/forum_admin/forum_admin.php?forumgodel=yes&forum_id=1&cat_id=2&ctg=Αρχή&ok=0' onClick='return confirmation();'>
+      <img src='../../template/classic/img/delete.gif' title='Διαγραφή' border='0'></img></a></td>
+      </tr></tbody></table></form>
+<br>
+
+<h3> New Category Topic form</h3>
+
+<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumgoadd=yes&ctg=Αρχή&cat_id=2" method=post onsubmit="return checkrequired(this,'forum_name');">
+  <table width=99% class="FormData" align="left">
+  <tbody>
+  <tr>
+  <th width="220">&nbsp;</th>
+  <td><b>Προσθήκη περιοχής συζητήσεων</b></td>
+  </tr>
+  <tr>
+  <th class="left">Κατηγορία:</th>
+  <td>Αρχή</td>
+  </tr>
+  <tr>
+  <th class="left">Όνομα περιοχής συζητήσεων:</th>
+  <td><input type=text name=forum_name size=40 class="FormData_InputText"></td>
+  </tr>
+  <tr>
+  <th class="left">Περιγραφή:</th>
+  <td><textarea name=forum_desc cols=37 rows=3 class="FormData_InputText"></textarea></td>
+  </tr>
+  <tr><th>&nbsp;</th>
+  <td>
+  <input type=hidden name=cat_id value='2'>
+  <input type=hidden name=forumgoadd value=yes>
+  <input type=submit value=Προσθήκη>
+  </td>
+  </tr></tbody></table>
+</form>
+<br>
+
+<h3> General edit Topic Category form</h3>
+
+<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumgosave=yes&ctg=Αρχή&cat_id=2" method=post onsubmit="return checkrequired(this,'forum_name');">
+  <input type=hidden name=forum_id value=1>
+  <table width=99% class='FormData'>
+  <tbody>
+  <tr>
+  <th width='220'>&nbsp;</th>
+  <td><b>Τροποποίηση της περιοχής συζήτησης</b></td>
+  </tr>
+  <tr>
+  <th class='left'>Όνομα περιοχής συζητήσεων</th>
+  <td><input type=text name=forum_name size=50 value='Γενικές συζητήσεις' class='FormData_InputText'></td>
+  </tr>
+  <tr>
+  <th class='left'>Περιγραφή</th>
+  <td><textarea name=forum_desc cols=47 rows=3 class='FormData_InputText'>Περιοχή συζητήσεων για κάθε θέμα που αφορά το μάθημα</textarea></td>
+  </tr>
+  <tr>
+  <th class='left'>Αλλαγή της κατηγορίας</th>
+  <td>
+  <select name=cat_id class="auth_input"><option value='2' selected>Αρχή</option></select></td></tr>
+  <tr>
+  <th>&nbsp;</th>
+  <td><input type=hidden name=forumgosave value=yes>
+  <input type=submit value='Αποθήκευση'>
+  </td>
+  </tr></thead></table></form>
+<br>
+
+<h3> Edit Category name form</h3>
+
+<form action='http://localhost:8001/modules/forum_admin/forum_admin.php?forumcatsave=yes' method=post onsubmit="return checkrequired(this,'cat_title');">
+  <input type=hidden name=cat_id value=2>
+  <table width=99% class="FormData">
+  <tbody><tr><th width="220">&nbsp;</th>
+    <td><b>Αλλαγή ονόματος κατηγορίας</b></td>
+  </tr>
+  <tr>
+    <th class='left'>Κατηγορία</th>
+    <td><input type=text name=cat_title size=55 value='Αρχή' class="FormData_InputText"></td>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <td><input type=submit value='Αποθήκευση'></td>
+  </tr>
+  </thead>
+  </table>
+</form>
+<br>
+
+<h3>Edit post form</h3>
+
+<form action='http://localhost:8001/modules/phpbb/editpost.php' method='post'>
+  <table class='FormData' width='99%'>
+  <tbody>
+  <tr>
+  <th width='220'>&nbsp;</th>
+  <td><b>Αλλαγή απάντησης</b></TD>
+  </tr><tr>
+    <th class='left'>Θέμα:</th>
+    <td><input type='text' name='subject' size='53' maxlength='100' value='New Topic 2'  class='FormData_InputText' /></td>
+    </tr><tr><th class='left'>Σώμα μηνύματος:</th>
+  <td>
+  <table class='xinha_editor'>
+  <tr>
+  <td>
+  <textarea id='xinha' name='message' rows='10' cols='50' class='FormData_InputText'>Description</textarea>
+  </td></tr></table>
+  </td>
+  </tr>
+  <tr>
+  <th class='left'>Διαγραφή του μηνύματος:</th>
+  <td><input type='checkbox' name='delete' /></td>
+  </tr>
+  <tr><th>&nbsp;</th><td>
+  <input type='hidden' name='post_id' value='5' />
+  <input type='hidden' name='forum' value='1' />
+  <input type='submit' name='submit' value='Υποβολή' />
+  </td></tr>
+</tbody></table></form>
+<br>
+
+<!-- <a href="http://localhost:8001/modules/phpbb/index.php?forumcatnotify=1&cat_id=2">Link check</a> -->
+<!-- So... admin stuff... links... and iframe trouble... -->
 
 </body>
 </html>
