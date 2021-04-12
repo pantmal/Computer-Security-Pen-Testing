@@ -70,12 +70,31 @@ $tool_content = "";
 /*****************************************************************************
 		MAIN BODY
 ******************************************************************************/
+
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (isset($submit) && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+// BROKEN
+// Remove the if and the token
+
+
 // Define $searchurl to go back to search results
 if (isset($search) && ($search=="yes")) {
 	$searchurl = "&search=yes";
 }
 // Update cours basic information
-if (isset($submit))  {
+if (isset($submit) && $_POST['token'] === $token )  {
   // Get faculte ID and faculte name for $faculte
   // $faculte example: 12--Tmima 1
   list($facid, $facname) = explode("--", $faculte);
@@ -135,6 +154,7 @@ else {
   </tr>
   <tr>
     <th>&nbsp;</th>
+    <input type=\"hidden\" name=\"token\" value=\"$token\"/>	
     <td><input type='submit' name='submit' value='$langModify'></td>
   </tr>
   </tbody>

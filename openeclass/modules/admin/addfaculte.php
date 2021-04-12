@@ -82,6 +82,24 @@ $tool_content = "";
 /*****************************************************************************
 		MAIN BODY
 ******************************************************************************/
+
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if ( ($a == 1 && isset($add) && $_POST['token'] !== $token) || ( $a == 3 && isset($_POST['edit']) && $_POST['token'] !== $token) ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+// BROKEN
+// Remove the if and the token
+
 	// Give administrator a link to add a new faculty
     $tool_content .= "<div id='operations_container'>
 	<ul id='opslist'>
@@ -139,6 +157,9 @@ if (!isset($a)) {
 // Add a new faculte
 elseif ($a == 1)  {
 	if (isset($add)) {
+
+		if ($_POST['token'] === $token){
+
 		// Check for empty fields
 		if (empty($codefaculte) or empty($faculte)) {
 			$tool_content .= "<p>".$langEmptyFaculte."</p><br />";
@@ -165,6 +186,7 @@ elseif ($a == 1)  {
 				or die ($langNoSuccess);
 			$tool_content .= "<p>".$langAddSuccess."</p><br />";
 			}
+		}
 	} else {
 		// Display form for new faculte information
 		$tool_content .= "<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."?a=1\">";
@@ -182,6 +204,7 @@ elseif ($a == 1)  {
 		</tr>
 		<tr>
 		<th>&nbsp;</th>
+		<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
 		<td><input type='submit' name='add' value='".$langAdd."' /></td>
 		</tr>
 		</tbody>
@@ -210,6 +233,9 @@ elseif ($a == 2) {
 elseif ($a == 3)  {
         $c = @intval($_REQUEST['c']);
 	if (isset($_POST['edit'])) {
+
+		if ($_POST['token'] === $token){
+
 		// Check for empty fields
                 $faculte = $_POST['faculte'];
 		if (empty($faculte)) {
@@ -235,6 +261,7 @@ elseif ($a == 3)  {
 				or die ($langNoSuccess);
 			$tool_content .= "<p>$langEditFacSucces</p><br>";
 			}
+		}
 	} else {
 		// Get faculte information
                 $c = intval($_GET['c']);
@@ -260,6 +287,7 @@ elseif ($a == 3)  {
 		<tr>
 		<th>&nbsp;</th>
 		<td><input type='hidden' name='c' value='$c' />
+		<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
 		<input type='submit' name='edit' value='$langAcceptChanges' />
 		</td>
 		</tr>

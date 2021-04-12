@@ -61,6 +61,24 @@ $displayAnnouncementList = true;
 $displayForm = true;
 $id_hidden_input = '';
 
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (isset($_POST['submitAnnouncement']) && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+// BROKEN
+// Remove the if and the token
+
+
 foreach (array('title', 'title_en', 'newContent', 'newContent_en', 'comment', 'comment_en') as $var) {
         if (isset($_POST[$var])) {
                 $GLOBALS[$var] = autoquote($_POST[$var]);
@@ -94,22 +112,26 @@ if (isset($_GET['delete'])) {
         }
 } elseif (isset($_POST['submitAnnouncement'])) {
 	// submit announcement command
-        if (isset($_POST['id'])) {
-                // modify announcement
-                $id = intval($_POST['id']);
-                db_query("UPDATE admin_announcements
-                        SET gr_title = $title, gr_body = $newContent, gr_comment = $comment,
-                        en_title = $title_en, en_body = $newContent_en, en_comment = $comment_en,
-                        visible = '$visible', date = NOW()
-                        WHERE id = $id", $mysqlMainDb);
-                $message = $langAdminAnnModify;
-        } else {
-                // add new announcement
-                db_query("INSERT INTO admin_announcements
-                        SET gr_title = $title, gr_body = $newContent, gr_comment = $comment,
-                        en_title = $title_en, en_body = $newContent_en, en_comment = $comment_en,
-                        visible = '$visible', date = NOW()");
-                $message = $langAdminAnnAdd;
+
+        if ( $_POST['token'] === $token){
+
+                if (isset($_POST['id'])) {
+                        // modify announcement
+                        $id = intval($_POST['id']);
+                        db_query("UPDATE admin_announcements
+                                SET gr_title = $title, gr_body = $newContent, gr_comment = $comment,
+                                en_title = $title_en, en_body = $newContent_en, en_comment = $comment_en,
+                                visible = '$visible', date = NOW()
+                                WHERE id = $id", $mysqlMainDb);
+                        $message = $langAdminAnnModify;
+                } else {
+                        // add new announcement
+                        db_query("INSERT INTO admin_announcements
+                                SET gr_title = $title, gr_body = $newContent, gr_comment = $comment,
+                                en_title = $title_en, en_body = $newContent_en, en_comment = $comment_en,
+                                visible = '$visible', date = NOW()");
+                        $message = $langAdminAnnAdd;
+                }
         }
 }
 
@@ -169,6 +191,7 @@ if ($displayForm && (@$addAnnouce==1 || isset($modify))) {
                    <td><textarea name='comment_en' rows='2' cols='50' class='FormData_InputText'>$commentToModifyEn</textarea>
                        </td></tr>
               <tr><th class='left'>&nbsp;</th>
+              <input type=\"hidden\" name=\"token\" value=\"$token\"/>	
                   <td><input type='submit' name='submitAnnouncement' value='$langSubmit' /></td></tr>
               <tr><td colspan='2'>&nbsp;</td></tr>
           </tbody>

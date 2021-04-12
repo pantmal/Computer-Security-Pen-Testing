@@ -46,6 +46,23 @@ include 'admin.inc.php';
 include '../auth/auth.inc.php';
 include '../../include/jscalendar/calendar.php';
 
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (!empty($u_submitted) && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+// BROKEN
+// Remove the big if and the token input.
+
 if (isset($_GET['u']) or isset($_POST['u']))
 $_SESSION['u_tmp']=$u;
 if(!isset($_GET['u']) or !isset($_POST['u']))
@@ -205,6 +222,7 @@ $tool_content .= "
       <input type='hidden' name='u' value='$u' />
       <input type='hidden' name='u_submitted' value='1' />
       <input type='hidden' name='registered_at' value='".$info['registered_at']."' />
+	  <input type=\"hidden\" name=\"token\" value=\"$token\"/>	
       <input type='submit' name='submit_edituser' value='$langModify' />
     </td>
   </tr>
@@ -288,6 +306,8 @@ $tool_content .= "
 		}
 	}  else { // if the form was submitted then update user
 
+		if ($_POST['token'] === $token){
+
 		// get the variables from the form and initialize them
 		$fname = isset($_POST['fname'])?$_POST['fname']:'';
 		$lname = isset($_POST['lname'])?$_POST['lname']:'';
@@ -354,6 +374,7 @@ if (mysql_num_rows($username_check) > 1) {
                         }
                         $tool_content .= "<a href='listusers.php'>$langBack</a></center>";
                 }
+			}
 	}
 }
 else

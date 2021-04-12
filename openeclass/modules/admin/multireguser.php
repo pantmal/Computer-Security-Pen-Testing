@@ -20,7 +20,26 @@ $tool_content = "";
 $error = '';
 $acceptable_fields = array('first', 'last', 'email', 'id', 'phone', 'username');
 
-if (isset($_POST['submit'])) {
+
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (isset($_POST['submit']) && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// Remove token check
+// also remove the hidden input
+
+if (isset($_POST['submit']) && $_POST['token'] === $token ) {
         $send_mail = isset($_POST['send_mail']) && $_POST['send_mail'];
         $unparsed_lines = '';
         $new_users_info = array();
@@ -141,6 +160,7 @@ if (isset($_POST['submit'])) {
         $langMultiRegSendMail</td>
 </tr>
 <tr><th>&nbsp;</th>
+<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
     <td><input type='submit' name='submit' value='$langSubmit' /></td>
 </tr>
 </table>

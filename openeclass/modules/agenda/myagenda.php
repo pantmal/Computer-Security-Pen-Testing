@@ -85,10 +85,16 @@ function get_agendaitems($query, $month, $year) {
 	global $urlServer;
 	$items = array();
 
+	// BROKEN
+	// Remove the safes
+
+	$safe_month = mysql_real_escape_string($month);
+	$safe_year = mysql_real_escape_string($year);
+
 	// get agenda-items for every course
 	while ($mycours = mysql_fetch_array($query))
 	{
-	$result = db_query("SELECT * FROM agenda WHERE month(day)='$month' AND year(day)='$year'","$mycours[k]");
+	$result = db_query("SELECT * FROM agenda WHERE month(day)='$safe_month' AND year(day)='$safe_year'","$mycours[k]");
 
 	    while ($item = mysql_fetch_array($result))
 	    {

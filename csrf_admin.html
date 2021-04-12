@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Welcome to CSRF Helper! This 'site' will be used in order to perform the various CSRF attacks. </h1>
+<h2>This one focuses on admin stuff (Note: some admin-specific forms are on the other file too). </h2>
+
+<h3> Edit user form </h3>
+<form name='edituser' method='post' action='http://localhost:8001/modules/admin/edituser.php'>
+    <table class='FormData' width='99%' align='left'>
+    <tbody>
+    <tr>
+      <th width='220'>&nbsp;</th>
+      <td><b>Επεξεργασία στοιχείων χρήστη drunkadmin</b></td>
+    </tr>
+    <tr>
+      <th class='left'>Επώνυμο:</th>
+      <td><input type='text' name='lname' size='50' value='Πλατφόρμας' /></td>
+    </tr>
+    <tr>
+      <th class='left'>Όνομα:</th>
+      <td><input type='text' name='fname' size='50' value='Διαχειριστής' /></td>
+    </tr>
+    <tr>
+      <th class='left'>Όνομα χρήστη (username):</th>
+      <td><input type='text' name='username' size='50' value='drunkadmin' /></td>
+    </tr>
+    <tr>
+      <th class='left'>e-mail: </th>
+      <td><input type='text' name='email' size='50' value='webmaster@localhost' /></td>
+    </tr>
+    <tr>
+      <th class='left'>Αριθμός μητρώου: </th>
+      <td><input type='text' name='am' size='50' value='' /></td>
+    </tr>
+   <tr>
+     <th class='left'>Τηλ.: </th>
+     <td><input type='text' name='phone' size='50' value='' /></td>
+    </tr><tr>
+      <th class='left'>Σχολή / Τμήμα:</th>
+      <td></td></tr><tr><th class='left'>Ιδιότητα:</th><td>
+  <select name='newstatut'  class='auth_input'>
+  <option selected value='1'>Εκπαιδευτής</option>
+  <option value='5'>Εκπαιδευόμενος</option>
+  </select>
+  </td><tr>
+      <th class='left'>Ημερομηνία εγγραφής:</th>
+      <td><span style='color:green;font-weight:bold;'>6/4/2021 18:50</span></td>
+    </tr>
+    <tr>
+      <th class='left'>Ημερομηνία λήξης: </th>
+      <td><input style="width: 15em; color: #840; background-color: #ff8; border: 1px solid #000; text-align: center" name="date" value="13-9-2025" id="f-calendar-field-1" type="text" /><a href="#" id="f-calendar-trigger-1"><img align="middle" border="0" src="http://localhost:8001/include/jscalendar/img.gif" alt="" /></a><script type="text/javascript">Calendar.setup({"ifFormat": "%d-%m-%Y","daFormat": "%Y/%m/%d","showOthers":true,"align": "Tl","inputField": "f-calendar-field-1","button": "f-calendar-trigger-1"});</script>&nbsp;&nbsp;&nbsp;<select name='hour'>
+              <option value='03'>03</option>
+              <option value='--'>--</option><option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option></select>&nbsp;&nbsp;&nbsp;<select name='minute'>
+                            <option value='44'>44</option>
+                            <option value='--'>--</option><option value='0'>0</option><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select></td>
+    </tr>
+    <tr>
+      <th class='left'>Αριθμός χρήστη: </th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th class='left'>&nbsp;</th>
+      <td>
+        <input type='hidden' name='u' value='1' />
+        <input type='hidden' name='u_submitted' value='1' />
+        <input type='hidden' name='registered_at' value='1617724251' />
+        <input type='submit' name='submit_edituser' value='Αλλαγή' />
+      </td>
+    </tr>
+    <tr>
+      <td colspan='2'>&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+<br>
+
+<h3> Multi reg user form</h3>
+
+<form method='post' action='http://localhost:8001/modules/admin/multireguser.php'>
+    <table class='FormData'>
+    <tr><th>Ορισμός πεδίων</th>
+        <td><input type='text' name='fields' size='50' value='first last id email phone' /></td>
+    <tr><th>Στοιχεία χρηστών</th>
+        <td><textarea class='auth_input' name='user_info' rows='10' cols='60'></textarea></td>
+    </tr>
+    <tr><th>Δημιουργία λογαριασμών</th>
+        <td><select name='type'>
+            <option value='stud'>εκπαιδευόμενων</option>
+            <option value='prof'>Εκπαιδευτών</option></select></td>
+    </tr>
+    <tr><th>Πρόθεμα username χρηστών</th>
+        <td><input type='text' name='prefix' size='10' value='user' /></td>
+    </tr>
+    <tr><th>Σχολή / Τμήμα</th>
+        <td>
+    <select name='facid'  class='auth_input'>
+    <option value='1'>Τμήμα 1</option>
+    <option value='2'>Τμήμα 2</option>
+    <option value='3'>Τμήμα 3</option>
+    <option value='4'>Τμήμα 4</option>
+    <option value='6'>Τμήμα 5</option>
+    </select>
+    </td>
+    </tr>
+    <tr><th>Αριθμός μητρώου</th>
+        <td><input type='text' name='am' size='10' /></td>
+    </tr>
+    <tr><th>Γλώσσα</th>
+        <td>
+    <select name='lang'  class='auth_input'>
+    <option selected value='el'>Ελληνικά</option>
+    <option value='en'>English</option>
+    <option value='es'>Español</option>
+    </select>
+    </td>
+    </tr>
+    <tr><th>Ενημερωτικό email</th>
+        <td><input name='send_mail' type='checkbox' />
+            Αποστολή των στοιχείων των χρηστών μέσω e-mail</td>
+    </tr>
+    <tr><th>&nbsp;</th>
+        <td><input type='submit' name='submit' value='Υποβολή' /></td>
+    </tr>
+    </table>
+</form>
+<br>
+
+<h3> Change Course info form</h3>
+
+<form action=http://localhost:8001/modules/admin/infocours.php?c=TMA100 method="post">
+    <table class="FormData" width="99%" align="left">
+    <tbody>
+    <tr>
+      <th width="220">&nbsp;</th>
+      <td><b>Αλλαγή Στοιχείων Μαθήματος</b></td>
+    </tr>
+    <tr>
+      <th class="left">Σχολή / Τμήμα:</th>
+      <td><select name="faculte">
+  <option value="1--Τμήμα 1" selected>Τμήμα 1</option><option value="2--Τμήμα 2">Τμήμα 2</option><option value="3--Τμήμα 3">Τμήμα 3</option><option value="4--Τμήμα 4">Τμήμα 4</option><option value="6--Τμήμα 5">Τμήμα 5</option></select>
+      </td>
+    </tr>
+    <tr>
+      <th class="left">Μάθημα (Κωδικός):</th>
+      <td><i>TMA100</i></td>
+    </tr>
+    <tr>
+      <th class="left">Τίτλος:</b></th>
+      <td><input type="text" name="intitule" value="HyperSecurity" size="60"></td>
+    </tr>
+    <tr>
+      <th class="left">Εκπαιδευτής:</th>
+      <td><input type="text" name="titulaires" value="Διαχειριστής Πλατφόρμας" size="60"></td>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <td><input type='submit' name='submit' value='Αλλαγή'></td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+<br>
+
+<h3> Add faculte form</h3>
+
+<form method="post" action="http://localhost:8001/modules/admin/addfaculte.php?a=1"><table width='99%' class='FormData'>
+    <tbody><tr>
+    <th width="220">&nbsp;</th>
+    <td colspan="2"><b>Εισαγωγή Στοιχείων Σχολής / Τμήματος</b></td>
+    <tr>
+    <th class='left'>Κωδικός Σχολής / Τμήματος:</th>
+    <td><input class='FormData_InputText' type='text' name='codefaculte' value='' /></td><td><i>(με λατινικούς χαρακτήρες μόνο, π.χ. MATH)</i></td>
+    </tr>
+    <tr>
+    <th class='left'>Σχολή / Τμήμα:</th>
+    <td><input class='FormData_InputText' type='text' name='faculte' value='' /></td><td><i>(π.χ. Μαθηματικό)</i></td>
+    </tr>
+    <tr>
+    <th>&nbsp;</th>
+    <td><input type='submit' name='add' value='Προσθήκη' /></td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+<br>
+
+<h3> Edit faculte form</h3>
+
+<form method='post' action='http://localhost:8001/modules/admin/addfaculte.php?a=3'><table width='99%' class='FormData'>
+    <tbody>
+    <tr>
+    <th width='220'>&nbsp;</th>
+    <td colspan='2'><b>Επεξεργασία στοιχείων Σχολής / Τμήματος</b></td>
+    </tr>
+    <tr>
+    <th class='left'>Κωδικός Σχολής / Τμήματος:</th>
+    <td><input type='text' name='codefaculte' value='TME' readonly='1' />&nbsp;<i>(με λατινικούς χαρακτήρες μόνο, π.χ. MATH)</i></td>
+    </tr>
+    <tr>
+    <th class='left'>:</th>
+    <td><input type='text' name='faculte' value='Τμήμα 5' />&nbsp;<i>(π.χ. Μαθηματικό)</i></td>
+    </tr>
+    <tr>
+    <th>&nbsp;</th>
+    <td><input type='hidden' name='c' value='6' />
+    <input type='submit' name='edit' value='Επικύρωση Αλλαγών' />
+    </td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+<br>
+
+<h3> Add announcement form</h3>
+
+<form method='post' action='http://localhost:8001/modules/admin/adminannouncements.php?localize=el'><table width='99%' class='FormData' align='left'><tbody>
+    <tr><th width='220'>&nbsp;</th><td><b>Προσθήκη ανακοίνωσης διαχειριστή</b></td></tr>
+    <tr><th class='left'>Ορατή</th>
+        <td><input type='checkbox' value='1' name='visible' /></td></tr>
+    <tr><td colspan='2'>&nbsp;</td></tr>
+    <tr><th class='left'>Τίτλος</th>
+        <td><input type='text' name='title' value='' size='50' class='FormData_InputText' /></td></tr>
+    <tr><th class='left'>Ανακοίνωση</th>
+        <td><table class='xinha_editor'>
+                <tr><td><textarea id='xinha' name='newContent'></textarea>
+                        </td></tr></table>
+            </td></tr>
+    <tr><th class='left'>Σχόλια</th>
+        <td><textarea name='comment' rows='2' cols='50' class='FormData_InputText'></textarea>
+            </td></tr>
+    <tr><td colspan='2'>&nbsp;</td></tr>
+    <tr><th class='left'>Τίτλος (Αγγλικά)</th>
+        <td><input type='text' name='title_en' value='' size='50' class='FormData_InputText' /></td></tr>
+    <tr><th class='left'>Ανακοίνωση (Αγγλικά)</th>
+        <td><table class='xinha_editor'>
+                <tr><td><textarea id='xinha_en' name='newContent_en'></textarea>
+                        </td></tr>
+             </table></td></tr>
+   <tr><th class='left'>Σχόλια (Αγγλικά)</th>
+       <td><textarea name='comment_en' rows='2' cols='50' class='FormData_InputText'></textarea>
+           </td></tr>
+  <tr><th class='left'>&nbsp;</th>
+      <td><input type='submit' name='submitAnnouncement' value='Υποβολή' /></td></tr>
+  <tr><td colspan='2'>&nbsp;</td></tr>
+</tbody>
+</table>
+</form>
+<br>
+
+</body>
+</html>
