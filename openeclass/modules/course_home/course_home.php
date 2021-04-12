@@ -102,9 +102,27 @@ if (!empty($addon)) {
 $result = db_query("SELECT MAX(`order`) FROM course_units WHERE course_id = $cours_id");
 list($maxorder) = mysql_fetch_row($result);
 
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if ($is_adminOfCourse && isset($_REQUEST['edit_submit']) && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// if (isset($submit) && $submit)
+// also remove the hidden input
+
 // other actions in course unit
 if ($is_adminOfCourse) {
-        if (isset($_REQUEST['edit_submit'])) {
+        if (isset($_REQUEST['edit_submit']) && $_POST['token'] === $token) {
                 $title = autoquote($_REQUEST['unittitle']);
                 $descr = autoquote($_REQUEST['unitdescr']);
                 if (isset($_REQUEST['unit_id'])) { // update course unit

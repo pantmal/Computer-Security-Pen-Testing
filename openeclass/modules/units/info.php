@@ -32,6 +32,14 @@ $require_current_course = true;
 $require_help = TRUE;
 $helpTopic = 'AddCourseUnits';
 include '../../include/baseTheme.php';
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
 
 $nameTools = $langEditUnit;
 $tool_content = $head_content = "";
@@ -108,6 +116,7 @@ $tool_content .= "<table width='99%' class='FormData' align='center'><tbody>
         <table class='xinha_editor'><tr><td><textarea id='xinha' name='unitdescr'>". str_replace('{','&#123;',htmlspecialchars($unitdescr))."</textarea></td></tr>
         </table></td></tr>
         <tr><th>&nbsp;</th>
+        <input type=\"hidden\" name=\"token\" value=\"$token\"/>	
             <td><input type='submit' name='edit_submit' value='$button'></td></tr>
 </tbody></table>
 </form>";

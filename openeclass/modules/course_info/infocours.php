@@ -56,7 +56,24 @@ $head_content = <<<hContent
 <script type="text/javascript" src="$urlAppend/include/xinha/my_config2.js"></script>
 hContent;
 
-if (isset($_POST['submit'])) {
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if(isset($_POST['submit']) && $_POST['token'] !== $token){
+        header('Location: http://localhost:8001/index.php');
+}
+
+//BROKEN
+// if (isset($submit) && $submit)
+// also remove the hidden input
+
+if (isset($_POST['submit']) && $_POST['token'] === $token) {
         if (empty($_POST['title'])) {
                 $tool_content .= "<p class='caution_small'>$langNoCourseTitle<br />
                                   <a href='$_SERVER[PHP_SELF]'>$langAgain</a></p><br />";
@@ -287,6 +304,7 @@ if (isset($_POST['submit'])) {
       </tr>
       <tr>
         <th class='left' width='150'>&nbsp;</th>
+        <input type=\"hidden\" name=\"token\" value=\"$token\"/>
         <td><input type='submit' name='submit' value='$langSubmit' /></td>
         <td>&nbsp;</td>
       </tr>

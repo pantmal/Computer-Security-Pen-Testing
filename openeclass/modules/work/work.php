@@ -130,6 +130,7 @@ hContent;
 // main program
 //-------------------------------------------
 
+
 if (empty($_SESSION['token'])) {
 	if (function_exists('mcrypt_create_iv')) {
 		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
@@ -147,9 +148,14 @@ if($is_adminOfCourse && isset($_POST['new_assign']) && $_POST['token'] !== $toke
 	header('Location: http://localhost:8001/index.php');
 }
 
+if(!$is_adminOfCourse && isset($id) && isset($work_submit) && $_POST['token'] !== $token ) {
+	header('Location: http://localhost:8001/index.php');
+}
 //BROKEN
 // Change show_edit_assignment signature to ($id).
 // Change new_assignment signature to ()
+// Change show_student_assignment signature to ($id).
+// Change show_submission_form signature to ($id)
 // Remove token check.
 // also remove the hidden input
 if ($is_adminOfCourse) {
@@ -216,11 +222,13 @@ if ($is_adminOfCourse) {
 			$nameTools = $m['SubmissionStatusWorkInfo'];
 			$navigation[] = array("url"=>"work.php", "name"=> $langWorks);
 			$navigation[] = array("url"=>"work.php?id=$id", "name"=>$m['WorkView']);
-			submit_work($id);
+			if($_POST['token'] === $token){
+				submit_work($id);
+			}
 		} else {
 			$nameTools = $m['WorkView'];
 			$navigation[] = array("url"=>"work.php", "name"=> $langWorks);
-			show_student_assignment($id);
+			show_student_assignment($id, $token);
 		}
 	} else {
 		show_student_assignments();
@@ -588,7 +596,7 @@ function delete_assignment($id) {
 
 
 // show assignment - student
-function show_student_assignment($id)
+function show_student_assignment($id, $token)
 {
 	global $tool_content, $m, $uid, $langSubmitted, $langSubmittedAndGraded, $langNotice3,
 	$langWorks, $langUserOnly, $langBack, $langWorkGrade, $langGradeComments;
@@ -645,7 +653,7 @@ function show_student_assignment($id)
 		}
 	}
 	if ($submit_ok) {
-		show_submission_form($id);
+		show_submission_form($id, $token);
 	}
 	$tool_content .= "
     <br/>
@@ -653,7 +661,7 @@ function show_student_assignment($id)
 }
 
 
-function show_submission_form($id)
+function show_submission_form($id, $token)
 {
 	global $tool_content, $m, $langWorkFile, $langSendFile, $langSubmit, $uid, $langNotice3;
 
@@ -683,6 +691,7 @@ function show_submission_form($id)
     </tr>
     <tr>
       <th>&nbsp;</th>
+	  <input type="hidden" name="token" value="$token"/>	
       <td><input type="submit" value="${langSubmit}" name="work_submit" /><br />$langNotice3</td>
     </tr>
     </tbody>

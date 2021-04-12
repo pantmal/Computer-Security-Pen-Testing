@@ -88,6 +88,15 @@ $_SESSION['receivedOrder'] = $receivedOrder;
 */
 require_once("dropbox_class.inc.php");
 
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
 if (isset($_GET['mailing']))  // RH: Mailing detail window passes parameter
 {
 	checkUserOwnsThisMailing($_GET['mailing'], $uid);
@@ -210,6 +219,7 @@ tCont2;
     </tr>
     <tr>
       <th>&nbsp;</th>
+	  <input type=\"hidden\" name=\"token\" value=\"$token\"/>	
       <td><input type='Submit' name='submitWork' value='".$dropbox_lang["ok"]."' /></td>
     </tr>
     </tbody>

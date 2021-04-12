@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Welcome to CSRF Helper! This 'site' will be used in order to perform the various CSRF attacks. </h1>
+<h2>Every single form is taken and copy-pasted here. </h2>
+<form method='post' action='http://localhost:8001/modules/course_info/infocours.php'>
+  <table width='99%' align='left'>
+  <thead><tr>
+  <td>
+  <table width='100%' class='FormData' align='left'>
+  <tbody>
+  <tr>
+    <th class='left' width='150'>&nbsp;</th>
+    <td><b>Ταυτότητα Μαθήματος</b></td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <th class='left'>Κωδικός&nbsp;:</th>
+    <td>TMA101</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th class='left'>Τίτλος Μαθήματος&nbsp;:</th>
+    <td><input type='text' name='title' value='HyperSecurity' size='60' class='FormData_InputText' /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th class='left'>Εκπαιδευτές&nbsp;:</th>
+    <td><input type='text' name='titulary' value='Διαχειριστής Πλατφόρμας' size='60' class='FormData_InputText' /></td>
+  <td>&nbsp;</td>
+  </tr>
+    <tr><th class='left'>Σχολή / Τμήμα&nbsp;:</th>
+    <td>
+  <select name='facu' class='auth_input'><option value='1--Τμήμα 1' selected="1">Τμήμα 1</option><option value='2--Τμήμα 2'>Τμήμα 2</option><option value='3--Τμήμα 3'>Τμήμα 3</option><option value='4--Τμήμα 4'>Τμήμα 4</option><option value='5--Τμήμα 5'>Τμήμα 5</option></select></td><td>&nbsp;</td></tr>
+  <tr>
+  <th class='left'>Τύπος&nbsp;:</th>
+  <td>
+<select name='type'  class='auth_input'>
+<option selected value='pre'>Προπτυχιακό</option>
+<option value='post'>Μεταπτυχιακό</option>
+<option value='other'>Άλλο</option>
+</select>
+</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th class='left'>Περιγραφή&nbsp;:</th>
+      <td width='100'>
+      <table class='xinha_editor'>
+        <tr>
+           <td><textarea id='xinha' name='description' cols='20' rows='4' class='FormData_InputText'>ewewewewe</textarea></td>
+        </tr>
+        </table>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th class='left'>Λέξεις Κλειδιά:&nbsp;</th>
+      <td><input type='text' name='course_keywords' value='' size='60' class='FormData_InputText' /></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th class='left'>Συμπληρωματικά Στοιχεία:&nbsp;</th>
+      <td width='100'>
+      <table class='xinha_editor'>
+        <tr>
+      <td><textarea id='xinha2' name='course_addon' cols='20' rows='4' class='FormData_InputText'></textarea></td>
+      </tr>
+        </table>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>&nbsp;</p>
+    <table width='100%' class='FormData' align='left'>
+    <tbody>
+    <tr>
+      <th class='left' width='150'>&nbsp;</th>
+      <td colspan='2'><b>Πρόσβαση στο μάθημα</b></td>
+    </tr>
+    <tr>
+      <th class='left'><img src='../../template/classic/img/OpenCourse.gif' alt='Ανοικτό Μάθημα' title='Ανοικτό Μάθημα' width='16' height='16' />&nbsp;Ανοικτό Μάθημα&nbsp;:</th>
+      <td width='1'><input type='radio' name='formvisible' value='2' checked='1' /></td>
+      <td>Ελεύθερη Πρόσβαση (χωρίς εγγραφή) από τη αρχική σελίδα χωρίς συνθηματικό&nbsp;</td>
+    <tr>
+      <th rowspan='2' class='left'><img src='../../template/classic/img/Registration.gif' alt='Απαιτείται εγγραφή' title='Απαιτείται εγγραφή' width='16' height='16' />&nbsp;Απαιτείται εγγραφή&nbsp;:</th>
+      <td><input type='radio' name='formvisible' value='1' /></td>
+      <td>Ελεύθερη Πρόσβαση (με εγγραφή) σε όσους διαθέτουν λογαριασμό στην πλατφόρμα</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td bgcolor='#F8F8F8'><input type='checkbox' name='checkpassword' />&nbsp;Προαιρετικό συνθηματικό: &nbsp;<input type='text' name='password' value='' class='FormData_InputText' />
+      </td>
+    </tr>
+    <tr>
+      <th class='left'><img src='../../template/classic/img/ClosedCourse.gif' alt='Κλειστό μάθημα' title='Κλειστό μάθημα' width='16' height='16' />&nbsp;Κλειστό μάθημα&nbsp;:</th>
+      <td><input type='radio' name='formvisible' value='0' /></td>
+      <td>Πρόσβαση στο μάθημα (για εγγραφή) έχουν μόνο όσοι βρίσκονται στη Λίστα Χρηστών του μαθήματος&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>&nbsp;</p>
+    <table width='100%' class='FormData' align='left'>
+    <tbody>
+    <tr>
+      <th class='left' width='150'>&nbsp;</th>
+      <td colspan='2'><b>Γλώσσα</b></td>
+    </tr>
+    <tr>
+      <th class='left'>Επιλογές&nbsp;:</th>
+      <td width='1'>
+<select name='localize'  class='auth_input'>
+<option selected value='el'>Ελληνικά</option>
+<option value='en'>English</option>
+<option value='es'>Español</option>
+</select>
+
+      </td>
+      <td><small>Επιλέξτε την γλώσσα στην οποία θα εμφανίζονται τα μηνύματα του μαθήματος.</small></td>
+    </tr>
+    <tr>
+      <th class='left' width='150'>&nbsp;</th>
+      <td><input type='submit' name='submit' value='Υποβολή' /></td>
+      <td>&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+  </td>
+</tr>
+</thead>
+</table>
+</form>
+
+
+<form method='post' action='http://localhost:8001/courses/TMA101/'
+onsubmit="return checkrequired(this, 'unittitle');"><table width='99%' class='FormData' align='center'><tbody>
+<tr><th width='220'>&nbsp;</th>
+    <td><b>Προσθήκη θεματικής ενότητας</b></td></tr>
+<tr><th width='150' class='left'>Τίτλος θεματικής ενότητας:</th>
+    <td><input type='text' name='unittitle' size='50' maxlength='255'  class='FormData_InputText'></td></tr>
+<tr><th class='left'>Σύντομη περιγραφή:</th><td>
+<table class='xinha_editor'><tr><td><textarea id='xinha' name='unitdescr'></textarea></td></tr>
+</table></td></tr>
+<tr><th>&nbsp;</th>
+    <td><input type='submit' name='edit_submit' value='Προσθήκη'></td></tr>
+</tbody></table>
+</form>
+
+
+</body>
+</html>

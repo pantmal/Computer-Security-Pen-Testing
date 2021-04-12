@@ -83,7 +83,21 @@ require_once("dropbox_class.inc.php");
  * - VALIDATE POSTED DATA
  * - UPLOAD NEW FILE
  */
-if (isset($_POST["submitWork"]))
+
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+if (isset($_POST["submitWork"]) && $_POST['token'] !== $token ) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+if (isset($_POST["submitWork"]) && $_POST['token'] === $token)
 {
 	require("../../include/lib/fileUploadLib.inc.php");
 

@@ -19,8 +19,11 @@ phpbb/reply.php //fixed
 create_course/create_course.php //pending
 work.php:do_edit //fixed
 work.php:new_assign //fixed
+work.php:submit_work //fixed
 editpost.php //fixed
 admin/edit_user.php //fixed
 admin/multireguser.php //fixed
 admin/addfaculte.php //fixed
 admin/adminannouncements.php //fixed
+infocours.php //fixed
+units/info.php //fixed
