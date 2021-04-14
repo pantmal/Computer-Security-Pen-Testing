@@ -104,9 +104,11 @@ if (isset($submit) && (!isset($ldap_submit)) && !isset($changePass) && $_POST['t
 		$langcode = langname_to_code($language);
 
 		$username_form = escapeSimple($username_form);
+		$prenom_safe = htmlspecialchars($prenom_form);
+		$username_safe = htmlspecialchars($username_form);
 		if(mysql_query("UPDATE user
-	        SET nom='$nom_form', prenom='$prenom_form',
-	        username='$username_form', email='$email_form', am='$am_form',
+	        SET nom='$nom_form', prenom='$prenom_safe',
+	        username='$username_safe', email='$email_form', am='$am_form',
 	            perso='$persoStatus', lang='$langcode'
 	        WHERE user_id='".$_SESSION["uid"]."'")) {
 			if (isset($_SESSION['user_perso_active']) and $persoStatus == "no") {

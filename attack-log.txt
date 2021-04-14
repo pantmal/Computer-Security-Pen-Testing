@@ -27,3 +27,10 @@ admin/addfaculte.php //fixed
 admin/adminannouncements.php //fixed
 infocours.php //fixed
 units/info.php //fixed
+
+---------XSS-----------
+conference.php //fixed (csp and escape)
+myagenda.php //fixed (csp)
+infocours.php //fixed (escape)
+dropbox/index.php //fixed (csp)
+profile.php //fixed (escape)

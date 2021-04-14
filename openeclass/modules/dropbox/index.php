@@ -35,6 +35,7 @@
  * Based on code by Jan Bols
  *
  */
+header("Content-Security-Policy: script-src 'self'");
 
 require_once("dropbox_init1.inc.php");
 $nameTools = $dropbox_lang["dropbox"];

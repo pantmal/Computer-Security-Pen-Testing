@@ -105,13 +105,13 @@ if (isset($_POST['submit']) && $_POST['token'] === $token) {
 
                 list($facid, $facname) = explode('--', $_POST['facu']);
                 db_query("UPDATE `$mysqlMainDb`.cours
-                          SET intitule = " . autoquote($_POST['title']) .",
+                          SET intitule = " . autoquote(htmlspecialchars($_POST['title'])) .",
                               faculte = " . autoquote($facname) . ",
-                              description = " . autoquote($_POST['description']) . ",
+                              description = " . autoquote(htmlspecialchars($_POST['description'])) . ",
                               course_addon = " . autoquote($_POST['course_addon']) . ",
                               course_keywords = ".autoquote($_POST['course_keywords']) . ",
                               visible = " . intval($_POST['formvisible']) . ",
-                              titulaires = " . autoquote($_POST['titulary']) . ",
+                              titulaires = " . autoquote(htmlspecialchars($_POST['titulary'])) . ",
                               languageCourse = '$newlang',
                               type = " . autoquote($_POST['type']) . ",
                               password = " . autoquote($_POST['password']) . ",

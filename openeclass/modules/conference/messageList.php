@@ -26,6 +26,7 @@
 
 $require_current_course = TRUE;
 include '../../include/baseTheme.php';
+header("Content-Security-Policy: script-src 'self'");
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
@@ -113,7 +114,7 @@ $tmp = array_splice($fileContent, 0 , $lineToRemove);
 $fileReverse = array_reverse($fileContent);
 
 foreach ($fileReverse as $thisLine) {
-	$newline = preg_replace('/ : /', '</span> : ', $thisLine);
+	$newline = preg_replace('/ : /', '</span> : ', htmlspecialchars($thisLine));
 	if (strpos($newline, '</span>') === false) {
 		$newline .= '</span>';
 	}

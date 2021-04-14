@@ -34,7 +34,7 @@
  *	the user is enrolled in
  *
  */
-
+header("Content-Security-Policy: default-src 'self'");
 $require_login = TRUE;
 $ignore_module_ini = true;
 
