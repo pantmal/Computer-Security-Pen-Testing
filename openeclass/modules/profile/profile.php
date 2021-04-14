@@ -104,7 +104,7 @@ if (isset($submit) && (!isset($ldap_submit)) && !isset($changePass) && $_POST['t
 		$langcode = langname_to_code($language);
 
 		$username_form = escapeSimple($username_form);
-		$prenom_safe = htmlspecialchars($prenom_form);
+		$prenom_safe = htmlspecialchars($prenom_form); //BROKEN: Remove htmlspecialchars
 		$username_safe = htmlspecialchars($username_form);
 		if(mysql_query("UPDATE user
 	        SET nom='$nom_form', prenom='$prenom_safe',

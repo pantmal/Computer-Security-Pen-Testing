@@ -35,7 +35,7 @@
  * Based on code by Jan Bols
  *
  */
-header("Content-Security-Policy: script-src 'self'");
+header("Content-Security-Policy: script-src 'self'"); //BROKEN: Remove CSP
 
 require_once("dropbox_init1.inc.php");
 $nameTools = $dropbox_lang["dropbox"];
@@ -97,6 +97,9 @@ if (empty($_SESSION['token'])) {
 	}
 }
 $token = $_SESSION['token'];
+
+// BROKEN
+// Remove token checks and input
 
 if (isset($_GET['mailing']))  // RH: Mailing detail window passes parameter
 {

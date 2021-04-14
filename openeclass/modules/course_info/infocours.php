@@ -103,7 +103,7 @@ if (isset($_POST['submit']) && $_POST['token'] === $token) {
                         $password = "";
                 }
 
-                list($facid, $facname) = explode('--', $_POST['facu']);
+                list($facid, $facname) = explode('--', $_POST['facu']); //BROKEN: Remove htmlspecialchars
                 db_query("UPDATE `$mysqlMainDb`.cours
                           SET intitule = " . autoquote(htmlspecialchars($_POST['title'])) .",
                               faculte = " . autoquote($facname) . ",

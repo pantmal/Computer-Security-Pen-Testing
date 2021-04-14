@@ -84,6 +84,10 @@ require_once("dropbox_class.inc.php");
  * - UPLOAD NEW FILE
  */
 
+// BROKEN
+// Remove token checks
+
+
 if (empty($_SESSION['token'])) {
 	if (function_exists('mcrypt_create_iv')) {
 		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));

@@ -1,36 +1,42 @@
 
 ---------SQLI-----------
-work.php: 567 (and some others in work_functions) //fixed
-phpbb/viewtopic.php:89 //fixed
-phpbb/viewforum.php //fixed
-phpbb/newtopic.php:83 (and other lines) //fixed
-phpbb/index.php //fixed
-phpbb/reply.php //fixed (also fixed edit_post.php and functions.php)
-forum_admin/forum_admin.php //fixed
+modules/work/work.php: 567 (and some others in work_functions) //fixed
+modules/phpbb/viewtopic.php:89 //fixed
+modules/phpbb/viewforum.php //fixed
+modules/phpbb/newtopic.php:83 (and other lines) //fixed
+modules/phpbb/index.php //fixed
+modules/phpbb/reply.php //fixed (also fixed edit_post.php and functions.php)
+modules/forum_admin/forum_admin.php //fixed
 include/lib/main.lib.php:1213 (called from unregcourse) //fixed
 include/lib/main.lib.php:1235 (called from admin/editcours) //fixed 
-myagenda.php //fixed
+modules/agenda/myagenda.php //fixed
+
+Pending: Revert to prepared statements if you have time
 
 ---------CSRF-----------
-profile.php //fixed
-auth/courses.php //pending
-newtopic.php //fixed
-phpbb/reply.php //fixed
-create_course/create_course.php //pending
-work.php:do_edit //fixed
-work.php:new_assign //fixed
-work.php:submit_work //fixed
-editpost.php //fixed
-admin/edit_user.php //fixed
-admin/multireguser.php //fixed
-admin/addfaculte.php //fixed
-admin/adminannouncements.php //fixed
-infocours.php //fixed
-units/info.php //fixed
+modules/profile/profile.php //fixed
+modules/phpbb/editpost.php //fixed
+modules/phpbb/newtopic.php //fixed
+modules/phpbb/reply.php //fixed
+modules/work/work.php:do_edit //fixed
+modules/work/work.php:new_assign //fixed
+modules/work/work.php:submit_work //fixed
+modules/admin/edit_user.php //fixed
+modules/admin/multireguser.php //fixed
+modules/admin/addfaculte.php //fixed
+modules/admin/adminannouncements.php //fixed
+modules/admin/infocours.php //fixed
+modules/course_info/infocours.php (+ modules/course_home/course_home.php) //fixed 
+modules/units/info.php //fixed
+modules/dropbox/index.php (+ modules/dropbox/dropbox_submit.php) //fixed
+
+Pending: CONFERENCE, admin forms, auth/courses.php, create_course/create_course.php, 'harmless' forms, url stuff (only if there's time) 
 
 ---------XSS-----------
-conference.php //fixed (csp and escape)
-myagenda.php //fixed (csp)
-infocours.php //fixed (escape)
-dropbox/index.php //fixed (csp)
-profile.php //fixed (escape)
+modules/conference/conference.php (+ modules/conference/messageList.php) //fixed (csp and escape)
+modules/agenda/myagenda.php //fixed (csp)
+modules/course_info/infocours.php //fixed (escape)
+modules/dropbox/index.php //fixed (csp)
+modules/profile/profile.php //fixed (escape)
+
+Pending: Most forms and also CSP(?)
