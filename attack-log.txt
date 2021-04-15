@@ -38,5 +38,7 @@ modules/agenda/myagenda.php //fixed (csp)
 modules/course_info/infocours.php //fixed (escape)
 modules/dropbox/index.php //fixed (csp)
 modules/profile/profile.php //fixed (escape)
+modules/auth/newuser.php //fixed (escape)
+modules/forum_admin/forum_admin.php //fixed (escape)
 
 Pending: Most forms and also CSP(?)

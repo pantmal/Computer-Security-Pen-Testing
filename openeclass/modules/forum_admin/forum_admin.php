@@ -91,7 +91,7 @@ if(isset($forumgo)) {
 		<table width=99% class=\"ForumAdmSum\">
 		<tbody>
 		<tr class=\"odd\">
-		<td colspan=\"4\"><small>$langForCat: <b>$ctg</b></small></td>
+		<td colspan=\"4\"><small>$langForCat: <b>".q($ctg)."</b></small></td>
 		</tr>
 		<tr>
 		<th width='10'>$langID</th>
@@ -134,7 +134,7 @@ if(isset($forumgo)) {
 		</tr>
 		<tr>
 		<th class=\"left\">$langCat:</th>
-		<td>$ctg</td>
+		<td>".q($ctg)."</td>
 		</tr>
 		<tr>
 		<th class=\"left\">$langForName:</th>
@@ -226,7 +226,7 @@ if(isset($forumgo)) {
 
 	// save forum category
 	elseif (isset($forumcatsave)) {
-		db_query("update catagories set cat_title='$cat_title' where cat_id='$cat_id'", $currentCourseID);
+		db_query("update catagories set cat_title='".q($cat_title)."' where cat_id='".q($cat_id)."'", $currentCourseID);
 		$tool_content .= "\n<p class=\"success_small\">$langNameCatMod<br /><a href=\"$_SERVER[PHP_SELF]?forumadmin=yes\">$langBack</a></p>";
 	}
 
@@ -236,8 +236,10 @@ if(isset($forumgo)) {
 		$navigation[]= array ("url"=>"../forum_admin/forum_admin.php", "name"=> $langOrganisation);
 		$result = @db_query("SELECT user_id FROM users WHERE username='$forum_moderator'", $currentCourseID);
 		list($forum_moderator) = mysql_fetch_row($result);
+		$forum_name_safe = htmlspecialchars($forum_name);
+		$forum_desc_safe = htmlspecialchars($forum_desc);
 		@db_query("UPDATE users SET user_level='2' WHERE user_id='$forum_moderator'", $currrentCourseID);
-		@db_query("UPDATE forums SET forum_name='$forum_name', forum_desc='$forum_desc',
+		@db_query("UPDATE forums SET forum_name='$forum_name_safe', forum_desc='$forum_desc_safe',
             	forum_access='2', forum_moderator='1', cat_id='$cat_id',
             	forum_type='$forum_type' WHERE forum_id='$forum_id'", $currentCourseID);
 		$tool_content .= "\n<p class='success_small'>$langForumDataChanged<br />
@@ -246,7 +248,8 @@ if(isset($forumgo)) {
 
 	// forum add category
 	elseif(isset($forumcatadd)) {
-		db_query("INSERT INTO catagories VALUES (NULL, '$catagories', NULL)", $currentCourseID);
+		$categories_safe = q($catagories);
+		db_query("INSERT INTO catagories VALUES (NULL, '$categories_safe', NULL)", $currentCourseID);
 		$tool_content .= "\n<p class='success_small'>$langCatAdded<br />
 		<a href='$_SERVER[PHP_SELF]?forumadmin=yes'>$langBack</a></p>";
 		}
@@ -258,8 +261,10 @@ if(isset($forumgo)) {
 		$result = @db_query("SELECT user_id FROM users WHERE username='$forum_moderator'", $currentCourseID);
 		list($forum_moderator) = mysql_fetch_row($result);
 		db_query("UPDATE users SET user_level='2' WHERE user_id='$forum_moderator'", $currentCourseID);
+		$forum_name_safe = q($forum_name);
+		$forum_desc_safe = q($forum_desc);
 		@db_query("INSERT INTO forums (forum_id, forum_name, forum_desc, forum_access, forum_moderator, cat_id, forum_type)
-        	VALUES (NULL, '$forum_name', '$forum_desc', '2', '1', '$cat_id', '$forum_type')", $currentCourseID);
+        	VALUES (NULL, '$forum_name_safe', '$forum_desc_safe', '2', '1', '$cat_id', '$forum_type')", $currentCourseID);
 		$idforum=db_query("SELECT forum_id FROM forums WHERE forum_name='$forum_name'", $currentCourseID);
 		while ($my_forum_id = mysql_fetch_array($idforum)) {
 			$forid=$my_forum_id[0];

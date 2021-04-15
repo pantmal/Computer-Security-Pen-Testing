@@ -197,10 +197,15 @@ if (!isset($submit)) {
 	} else {
 		$password_encrypted = $password;
 	}
+
+	$prenom_safe = htmlspecialchars($prenom_form); //BROKEN: Remove htmlspecialchars
+	$nom_safe = htmlspecialchars($nom_form); //BROKEN: Remove htmlspecialchars
+	$am_safe = htmlspecialchars($am); //BROKEN: Remove htmlspecialchars
+	$uname_safe = htmlspecialchars($uname);
 	$q1 = "INSERT INTO `$mysqlMainDb`.user
 	(user_id, nom, prenom, username, password, email, statut, department, am, registered_at, expires_at, lang)
-	VALUES ('NULL', '$nom_form', '$prenom_form', '$uname', '$password_encrypted', '$email','5',
-		'$department','$am',".$registered_at.",".$expires_at.",'$lang')";
+	VALUES ('NULL', '$nom_safe', '$prenom_safe', '$uname_safe', '$password_encrypted', '$email','5',
+		'$department','$am_safe',".$registered_at.",".$expires_at.",'$lang')";
 	$inscr_user = mysql_query($q1);
 	$last_id = mysql_insert_id();
 	$result=mysql_query("SELECT user_id, nom, prenom FROM `$mysqlMainDb`.user WHERE user_id='$last_id'");
