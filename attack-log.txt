@@ -41,4 +41,7 @@ modules/profile/profile.php //fixed (escape)
 modules/auth/newuser.php //fixed (escape)
 modules/forum_admin/forum_admin.php //fixed (escape)
 
-Pending: Most forms and also CSP(?)
+Pending: Some more forms and also CSP(?)
+
+--------RFI------------
+Where art thou? ...

@@ -81,7 +81,7 @@ function checkrequired(which, entry) {
 </script>
 hContent;
 	// forum go
-if(isset($forumgo)) {
+if(isset($forumgo)) { //BROKEN: Remove q at line 94
 	$nameTools = $langAdd;
 	$navigation[]= array ("url"=>"../forum_admin/forum_admin.php", "name"=> $langOrganisation);
 	$result = db_query("SELECT forum_id, forum_name, forum_desc, forum_access, forum_moderator, forum_type 
@@ -123,7 +123,7 @@ if(isset($forumgo)) {
 		} else {
 			$tool_content .= "\n<p class=\"alert1\">$langNoForumsCat</p>";
 		}
-
+		//BROKEN: Remove q at line 137
 		$tool_content .= "
 		<form action=\"$_SERVER[PHP_SELF]?forumgoadd=yes&ctg=$ctg&cat_id=$cat_id\" method=post onsubmit=\"return checkrequired(this,'forum_name');\">
 		<table width=99% class=\"FormData\" align=\"left\">
@@ -225,7 +225,7 @@ if(isset($forumgo)) {
 	}
 
 	// save forum category
-	elseif (isset($forumcatsave)) {
+	elseif (isset($forumcatsave)) { //BROKEN: Remove q's at line 229
 		db_query("update catagories set cat_title='".q($cat_title)."' where cat_id='".q($cat_id)."'", $currentCourseID);
 		$tool_content .= "\n<p class=\"success_small\">$langNameCatMod<br /><a href=\"$_SERVER[PHP_SELF]?forumadmin=yes\">$langBack</a></p>";
 	}
@@ -236,7 +236,7 @@ if(isset($forumgo)) {
 		$navigation[]= array ("url"=>"../forum_admin/forum_admin.php", "name"=> $langOrganisation);
 		$result = @db_query("SELECT user_id FROM users WHERE username='$forum_moderator'", $currentCourseID);
 		list($forum_moderator) = mysql_fetch_row($result);
-		$forum_name_safe = htmlspecialchars($forum_name);
+		$forum_name_safe = htmlspecialchars($forum_name); //BROKEN: Remove htmlspecialchars
 		$forum_desc_safe = htmlspecialchars($forum_desc);
 		@db_query("UPDATE users SET user_level='2' WHERE user_id='$forum_moderator'", $currrentCourseID);
 		@db_query("UPDATE forums SET forum_name='$forum_name_safe', forum_desc='$forum_desc_safe',
@@ -247,7 +247,7 @@ if(isset($forumgo)) {
 	}
 
 	// forum add category
-	elseif(isset($forumcatadd)) {
+	elseif(isset($forumcatadd)) { //BROKEN: Remove q at line 251
 		$categories_safe = q($catagories);
 		db_query("INSERT INTO catagories VALUES (NULL, '$categories_safe', NULL)", $currentCourseID);
 		$tool_content .= "\n<p class='success_small'>$langCatAdded<br />
@@ -261,7 +261,7 @@ if(isset($forumgo)) {
 		$result = @db_query("SELECT user_id FROM users WHERE username='$forum_moderator'", $currentCourseID);
 		list($forum_moderator) = mysql_fetch_row($result);
 		db_query("UPDATE users SET user_level='2' WHERE user_id='$forum_moderator'", $currentCourseID);
-		$forum_name_safe = q($forum_name);
+		$forum_name_safe = q($forum_name); //BROKEN: Remove q
 		$forum_desc_safe = q($forum_desc);
 		@db_query("INSERT INTO forums (forum_id, forum_name, forum_desc, forum_access, forum_moderator, cat_id, forum_type)
         	VALUES (NULL, '$forum_name_safe', '$forum_desc_safe', '2', '1', '$cat_id', '$forum_type')", $currentCourseID);
