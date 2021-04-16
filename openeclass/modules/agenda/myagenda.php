@@ -34,7 +34,7 @@
  *	the user is enrolled in
  *
  */
-header("Content-Security-Policy: default-src 'self'"); //BROKEN: Remove CSP
+header("Content-Security-Policy: script-src 'self'"); //BROKEN: Remove CSP
 $require_login = TRUE;
 $ignore_module_ini = true;
 

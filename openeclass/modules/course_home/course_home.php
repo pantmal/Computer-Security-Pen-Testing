@@ -123,8 +123,8 @@ if ($is_adminOfCourse && isset($_REQUEST['edit_submit']) && $_POST['token'] !== 
 // other actions in course unit
 if ($is_adminOfCourse) {
         if (isset($_REQUEST['edit_submit']) && $_POST['token'] === $token) {
-                $title = autoquote($_REQUEST['unittitle']);
-                $descr = autoquote($_REQUEST['unitdescr']);
+                $title = autoquote(q($_REQUEST['unittitle'])); //BROKEN: Remove the q's
+                $descr = autoquote(q($_REQUEST['unitdescr']));
                 if (isset($_REQUEST['unit_id'])) { // update course unit
                         $unit_id = intval($_REQUEST['unit_id']);
                         $result = db_query("UPDATE course_units SET

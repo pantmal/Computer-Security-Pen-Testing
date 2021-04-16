@@ -268,7 +268,7 @@ function show_submission($sid)
 
 
 // insert the assignment into the database
-function add_assignment($title, $comments, $desc, $deadline, $group_submissions)
+function add_assignment($title, $comments, $desc, $deadline, $group_submissions) //BROKEN: Remove the q's
 {
 	global $tool_content, $workPath;
 
@@ -276,7 +276,7 @@ function add_assignment($title, $comments, $desc, $deadline, $group_submissions)
 	db_query("INSERT INTO assignments
 		(title, description, comments, deadline, submission_date, secret_directory,
 			group_submissions) VALUES
-		(".autoquote($title).", ".autoquote($desc).", ".autoquote($comments).", ".autoquote($deadline).", NOW(), '$secret',
+		(".autoquote(q($title)).", ".autoquote(q($desc)).", ".autoquote(q($comments)).", ".autoquote($deadline).", NOW(), '$secret',
 			".autoquote($group_submissions).")");
 	mkdir("$workPath/$secret",0777);
 }
@@ -564,15 +564,15 @@ function edit_assignment($id)
 
 	$nav[] = array("url"=>"work.php", "name"=> $langWorks);
 	$nav[] = array("url"=>"work.php?id=$id", "name"=> $_POST['title']);
-
-	if (db_query("UPDATE assignments SET title=".autoquote($_POST['title']).",
-		description=".autoquote($_POST['desc']).", group_submissions=".autoquote($_POST['group_submissions']).",
-		comments=".autoquote($_POST['comments']).", deadline=".autoquote($_POST['WorkEnd'])." WHERE id='$id'")) {
+	//BROKEN: Remove the q's
+	if (db_query("UPDATE assignments SET title=".autoquote(q($_POST['title'])).",
+		description=".autoquote(q($_POST['desc'])).", group_submissions=".autoquote($_POST['group_submissions']).",
+		comments=".autoquote(q($_POST['comments'])).", deadline=".autoquote($_POST['WorkEnd'])." WHERE id='$id'")) {
 
         $title = autounquote($_POST['title']);
-	$tool_content .="<p class='success_small'>$langEditSuccess<br /><a href='work.php?id=$id'>$langBackAssignment '$title'</a></p><br />";
+	$tool_content .="<p class='success_small'>$langEditSuccess<br /><a href='work.php?id=$id'>$langBackAssignment '".q($title)."'</a></p><br />";
 	} else {
-	$tool_content .="<p class='caution_small'>$langEditError<br /><a href='work.php?id=$id'>$langBackAssignment '$title'</a></p><br />";
+	$tool_content .="<p class='caution_small'>$langEditError<br /><a href='work.php?id=$id'>$langBackAssignment '".q($title)."'</a></p><br />";
 	}
 }
 

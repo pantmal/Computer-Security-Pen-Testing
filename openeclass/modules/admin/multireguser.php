@@ -199,18 +199,18 @@ function create_user($statut, $uname, $nom, $prenom, $email, $depid, $am, $phone
         $registered_at = time();
         $expires_at = time() + $durationAccount;
         $password_encrypted = md5($password);
-
+        //BROKEN: Remove the q's
         $req = db_query("INSERT INTO user
                                 (nom, prenom, username, password, email, statut, department, registered_at, expires_at, lang, am, phone)
                         VALUES (" .
-				autoquote($nom) . ', ' .
-				autoquote($prenom) . ', ' .
-				autoquote($uname) . ", '$password_encrypted', " .
-				autoquote($email) .
+				autoquote(q($nom)) . ', ' .
+				autoquote(q($prenom)) . ', ' .
+				autoquote(q($uname)) . ", '$password_encrypted', " .
+				autoquote(q($email)) .
 				", $statut, $depid, " .
                                 "$registered_at, $expires_at, '$lang', " .
-                                autoquote($am) . ', ' .
-                                autoquote($phone) . ')');
+                                autoquote(q($am)) . ', ' .
+                                autoquote(q($phone)) . ')');
         $id = mysql_insert_id();
 
         $emailsubject = "$langYourReg $siteName $type_message";

@@ -355,12 +355,12 @@ if (mysql_num_rows($username_check) > 1) {
 		if($registered_at>$expires_at) {
 			$tool_content .= "<center><br><b>$langExpireBeforeRegister<br><br><a href=\"edituser.php?u=".$u."\">$langAgain</a></b><br />";
 		} else {
-			if ($u=='1') $department = 'NULL';
-			$sql = "UPDATE user SET nom = ".autoquote($lname).", prenom = ".autoquote($fname).",
-				username = ".autoquote($username).", email = ".autoquote($email).", 
-				statut = ".intval($newstatut).", phone=".autoquote($phone).",
+			if ($u=='1') $department = 'NULL'; //BROKEN: Remove the q's
+			$sql = "UPDATE user SET nom = ".autoquote(q($lname)).", prenom = ".autoquote(q($fname)).",
+				username = ".autoquote(q($username)).", email = ".autoquote(q($email)).", 
+				statut = ".intval($newstatut).", phone=".autoquote(q($phone)).",
 				department = ".intval($department).", expires_at=".$expires_at.",
-                                am = ".autoquote($am)." WHERE user_id = ".intval($u);
+                                am = ".autoquote(q($am))." WHERE user_id = ".intval($u);
 			$qry = db_query($sql);
                         if (!$qry) {
                                 $tool_content .= "$langNoUpdate:".$u."!";
@@ -379,7 +379,7 @@ if (mysql_num_rows($username_check) > 1) {
 }
 else
 {
-	// Αλλιώς... τι γίνεται;
+	// Αλλιώς... τι γίνεται; ΟΕΟ;
 	$tool_content .= "<h1>$langError</h1>\n<p><a href=\"listcours.php\">$back</p>\n";
 }
 

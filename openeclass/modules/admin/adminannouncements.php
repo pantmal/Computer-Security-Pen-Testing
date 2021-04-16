@@ -113,22 +113,22 @@ if (isset($_GET['delete'])) {
 } elseif (isset($_POST['submitAnnouncement'])) {
 	// submit announcement command
 
-        if ( $_POST['token'] === $token){
+        if ( $_POST['token'] === $token){ //BROKEN: Remove the q's
 
                 if (isset($_POST['id'])) {
                         // modify announcement
                         $id = intval($_POST['id']);
                         db_query("UPDATE admin_announcements
-                                SET gr_title = $title, gr_body = $newContent, gr_comment = $comment,
-                                en_title = $title_en, en_body = $newContent_en, en_comment = $comment_en,
+                                SET gr_title = ".q($title).", gr_body = ".q($newContent).", gr_comment = ".q($comment).",
+                                en_title = ".q($title_en).", en_body = ".q($newContent_en).", en_comment = ".q($comment_en).",
                                 visible = '$visible', date = NOW()
                                 WHERE id = $id", $mysqlMainDb);
                         $message = $langAdminAnnModify;
                 } else {
                         // add new announcement
                         db_query("INSERT INTO admin_announcements
-                                SET gr_title = $title, gr_body = $newContent, gr_comment = $comment,
-                                en_title = $title_en, en_body = $newContent_en, en_comment = $comment_en,
+                                SET gr_title = ".q($title).", gr_body = ".q($newContent).", gr_comment = ".q($comment).",
+                                en_title = ".q($title_en).", en_body = ".q($newContent_en).", en_comment = ".q($comment_en).",
                                 visible = '$visible', date = NOW()");
                         $message = $langAdminAnnAdd;
                 }

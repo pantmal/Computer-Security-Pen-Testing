@@ -182,9 +182,9 @@ elseif ($a == 1)  {
 			$tool_content .= "<center><p><a href=\"$_SERVER[PHP_SELF]?a=1\">".$langReturnToAddFaculte."</a></p></center>";
 		} else {
 		// OK Create the new faculty
-			mysql_query("INSERT into faculte(code,name,generator,number) VALUES(" . autoquote($codefaculte) . ',' . autoquote($faculte) . ",'100','1000')")
+			mysql_query("INSERT into faculte(code,name,generator,number) VALUES(" . autoquote($codefaculte) . ',' . autoquote(q($faculte)) . ",'100','1000')")
 				or die ($langNoSuccess);
-			$tool_content .= "<p>".$langAddSuccess."</p><br />";
+			$tool_content .= "<p>".$langAddSuccess."</p><br />"; //BROKEN: Remove the q (two lines up :))
 			}
 		}
 	} else {
@@ -249,15 +249,15 @@ elseif ($a == 3)  {
 			$tool_content .= "<p align='right'><a href='$_SERVER[PHP_SELF]?a=3&amp;c=$c'>$langReturnToEditFaculte</a></p>";
 		} else {
 		// OK Update the faculte
-			mysql_query("UPDATE faculte SET name = " .
-                                    autoquote($faculte) . " WHERE id=$c")
+			mysql_query("UPDATE faculte SET name = " . //BROKEN: Remove the q's
+                                    autoquote(q($faculte)) . " WHERE id=$c")
 				or die ($langNoSuccess);
 		// For backwards compatibility update cours and cours_facult also
 			db_query("UPDATE cours SET faculte = " .
-                                    autoquote($faculte) . " WHERE faculteid=$c")
+                                    autoquote(q($faculte)) . " WHERE faculteid=$c")
 				or die ($langNoSuccess);
 			db_query("UPDATE cours_faculte SET faculte = " .
-                                    autoquote($faculte) . " WHERE facid=$c")
+                                    autoquote(q($faculte)) . " WHERE facid=$c")
 				or die ($langNoSuccess);
 			$tool_content .= "<p>$langEditFacSucces</p><br>";
 			}

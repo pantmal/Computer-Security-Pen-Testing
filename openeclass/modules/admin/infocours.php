@@ -88,6 +88,8 @@ if (isset($submit) && $_POST['token'] !== $token ) {
 // BROKEN
 // Remove the if and the token
 
+//BROKEN
+//Remove the q's
 
 // Define $searchurl to go back to search results
 if (isset($search) && ($search=="yes")) {
@@ -99,7 +101,7 @@ if (isset($submit) && $_POST['token'] === $token )  {
   // $faculte example: 12--Tmima 1
   list($facid, $facname) = explode("--", $faculte);
   // Update query
-	$sql = mysql_query("UPDATE cours SET faculte='$facname', titulaires='$titulaires', intitule='$intitule', faculteid='$facid' WHERE code='".mysql_real_escape_string($_GET['c'])."'");
+	$sql = mysql_query("UPDATE cours SET faculte='$facname', titulaires='".q($titulaires)."', intitule='".q($intitule)."', faculteid='$facid' WHERE code='".mysql_real_escape_string($_GET['c'])."'");
 	// Some changes happened
 	if (mysql_affected_rows() > 0) {
 		$sql = mysql_query("UPDATE cours_faculte SET faculte='$facname', facid='$facid' WHERE code='".mysql_real_escape_string($_GET['c'])."'");

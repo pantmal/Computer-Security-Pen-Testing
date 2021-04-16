@@ -40,8 +40,16 @@ modules/dropbox/index.php //fixed (csp)
 modules/profile/profile.php //fixed (escape)
 modules/auth/newuser.php //fixed (escape)
 modules/forum_admin/forum_admin.php //fixed (escape)
+modules/work/work.php //fixed (escape)
+modules/units/info.php (+ modules/course_home/course_home.php) //fixed (escape)
+modules/admin/edituser.php //fixed (escape)
+modules/admin/multireguser.php //fixed (escape)
+modules/admin/infocours.php //fixed (escape)
+modules/admin/addfaculte.php //fixed (escape)
+modules/admin/adminannouncements.php //fixed (escape)
+modules/create_course/create_course.php //fixed (escape)
 
-Pending: Some more forms and also CSP(?)
+Pending: 'harmless' forms and also CSP(?)
 
 --------RFI------------
 Where art thou? ...

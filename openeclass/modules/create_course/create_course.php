@@ -379,17 +379,17 @@ if (isset($_POST['create_course'])) {
 
         // ------------- update main Db------------
         mysql_select_db("$mysqlMainDb");
-
-        db_query("INSERT INTO cours SET
+		//BROKEN: Remove the q's
+        db_query("INSERT INTO cours SET 
                         code = '$code',
                         languageCourse =" . quote($language) . ",
-                        intitule = " . quote($intitule) . ",
-                        description = " . quote($description) . ",
-                        course_addon = " . quote($course_addon) . ",
-                        course_keywords = " . quote($course_keywords) . ",
+                        intitule = " . quote(q($intitule)) . ",
+                        description = " . quote(q($description)) . ",
+                        course_addon = " . quote(q($course_addon)) . ",
+                        course_keywords = " . quote(q($course_keywords)) . ",
                         faculte = " . quote($facname) . ",
                         visible = " . quote($formvisible) . ",
-                        titulaires = " . quote($titulaires) . ",
+                        titulaires = " . quote(q($titulaires)) . ",
                         fake_code = " . quote($code) . ",
                         type = " . quote($type) . ",
                         faculteid = '$facid',
