@@ -187,7 +187,7 @@ if (!isset( $_POST['authors']) || !isset( $_POST['description']))
 			$format = get_file_extension($dropbox_filename);
                 	$dropbox_filename = safe_filename($format);
 			// Transform any .php file in .phps fo security
-			// $dropbox_filename = php2phps ($dropbox_filename);
+			$dropbox_filename = php2phps ($dropbox_filename); //BROKEN comment out.
 			// set author
 			if ($_POST['authors'] == '')
 			{

@@ -29,8 +29,9 @@ modules/admin/infocours.php //fixed
 modules/course_info/infocours.php (+ modules/course_home/course_home.php) //fixed 
 modules/units/info.php //fixed
 modules/dropbox/index.php (+ modules/dropbox/dropbox_submit.php) //fixed
+modules/conference/conference.php (+ modules/conference/messageList.php) //fixed
 
-Pending: CONFERENCE, admin forms, auth/courses.php, create_course/create_course.php, 'harmless' forms, url stuff (only if there's time) 
+Pending: admin forms, auth/courses.php, create_course/create_course.php, 'harmless' forms, url stuff (only if there's time) 
 
 ---------XSS-----------
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed (csp and escape)
@@ -53,3 +54,5 @@ Pending: 'harmless' forms and also CSP(?)
 
 --------RFI------------
 Where art thou? ...
+modules/work/work.php //fixed (filter php)
+modules/dropbox/dropbox_submit.php //fixed (php2phps)
