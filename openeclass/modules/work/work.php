@@ -338,8 +338,8 @@ function submit_work($id) {
 		$local_name = "$local_name $am[0]";
 	}
 	$local_name = replace_dangerous_char($local_name);
-	// BROKEN: Remove php extension.
-	if (preg_match('/\.(ade|adp|bas|bat|chm|cmd|com|cpl|crt|exe|hlp|hta|' .'inf|ins|isp|jse|lnk|mdb|mde|msc|msi|msp|mst|php|pcd|pif|reg|scr|sct|shs|' .'shb|url|vbe|vbs|wsc|wsf|wsh)$/', $_FILES['userfile']['name'])) {
+	// BROKEN: Remove php2phps
+	if (preg_match('/\.(ade|adp|bas|bat|chm|cmd|com|cpl|crt|exe|hlp|hta|' .'inf|ins|isp|jse|lnk|mdb|mde|msc|msi|msp|mst|pcd|pif|reg|scr|sct|shs|' .'shb|url|vbe|vbs|wsc|wsf|wsh)$/', $_FILES['userfile']['name'])) {
 		$tool_content .= "<p class=\"caution_small\">$langUnwantedFiletype: {$_FILES['userfile']['name']}<br />";
 		$tool_content .= "<a href=\"$_SERVER[PHP_SELF]?id=$id\">$langBack</a></p><br />";
 		return;
@@ -347,6 +347,7 @@ function submit_work($id) {
 	$secret = work_secret($id);
         $ext = get_file_extension($_FILES['userfile']['name']);
 	$filename = "$secret/$local_name" . (empty($ext)? '': '.' . $ext);
+	$filename = php2phps ($filename);
 	if (move_uploaded_file($_FILES['userfile']['tmp_name'], "$workPath/$filename")) {
 		$msg2 = "$langUploadSuccess";//to message
 		$group_id = user_group($uid, FALSE);

@@ -31,7 +31,7 @@ modules/units/info.php //fixed
 modules/dropbox/index.php (+ modules/dropbox/dropbox_submit.php) //fixed
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed
 
-Pending: admin forms, auth/courses.php, create_course/create_course.php, 'harmless' forms, url stuff (only if there's time) 
+Pending: 'harmless' forms, admin forms, auth/courses.php, create_course/create_course.php, url stuff (only if there's time) 
 
 ---------XSS-----------
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed (csp and escape)
@@ -50,9 +50,12 @@ modules/admin/addfaculte.php //fixed (escape)
 modules/admin/adminannouncements.php //fixed (escape)
 modules/create_course/create_course.php //fixed (escape)
 
-Pending: 'harmless' forms and also CSP(?)
+Pending: 'harmless' forms, admin forms
 
 --------RFI------------
-Where art thou? ...
-modules/work/work.php //fixed (filter php)
-modules/dropbox/dropbox_submit.php //fixed (php2phps)
+modules/work/work.php //fixed (escape with php2phps)
+modules/dropbox/dropbox_submit.php //fixed (escape with php2phps)
+
+
+-------puppies-------
+???

@@ -184,6 +184,7 @@ if (!isset( $_POST['authors']) || !isset( $_POST['description']))
 		if (!$error) {
 			// set title
 			$dropbox_title = $dropbox_filename;
+			$dropbox_title = php2phps ($dropbox_title); //BROKEN comment out.
 			$format = get_file_extension($dropbox_filename);
                 	$dropbox_filename = safe_filename($format);
 			// Transform any .php file in .phps fo security
