@@ -359,11 +359,13 @@ function submit_work($id) {
 				'$REMOTE_ADDR', '$filename','".$_FILES['userfile']['name'].
 				"', '$stud_comments', '$group_id')", $currentCourseID);
 		} else {
+			// BROKEN: Remove escape
+			$stud_comments_safe = mysql_real_escape_string($stud_comments);
 			db_query("INSERT INTO assignment_submit
 				(uid, assignment_id, submission_date, submission_ip, file_path,
 				file_name, comments) VALUES ('$uid','$id', NOW(), '$REMOTE_ADDR',
 				'$filename','".$_FILES['userfile']['name'].
-				"', '$stud_comments')", $currentCourseID);
+				"', '$stud_comments_safe')", $currentCourseID);
 		}
 
 		$tool_content .="<p class='success_small'>$msg2<br />$msg1<br /><a href='work.php'>$langBack</a></p><br />";

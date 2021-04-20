@@ -73,7 +73,7 @@ function replace_dangerous_char($string)
 function php2phps($fileName)
 {
 	$fileName = preg_replace('/\.php$/', '.phps', $fileName);
-	$fileName = preg_replace('/\.html$/', '.txt', $fileName);
+	$fileName = preg_replace('/\.html$/', '.html.txt', $fileName);
 	return $fileName;
 }
 

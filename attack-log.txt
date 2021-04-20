@@ -1,6 +1,6 @@
 
 ---------SQLI-----------
-modules/work/work.php: 567 (and some others in work_functions) //fixed
+modules/work/work.php: 567 (and some others in work_functions and submit_work) //fixed
 modules/phpbb/viewtopic.php:89 //fixed
 modules/phpbb/viewforum.php //fixed
 modules/phpbb/newtopic.php:83 (and other lines) //fixed
