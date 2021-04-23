@@ -1,5 +1,6 @@
 
 ---------SQLI-----------
+-----Defence-------
 modules/work/work.php: 567 (and some others in work_functions and submit_work) //fixed
 modules/phpbb/viewtopic.php:89 //fixed
 modules/phpbb/viewforum.php //fixed
@@ -12,6 +13,15 @@ include/lib/main.lib.php:1235 (called from admin/editcours) //fixed
 modules/agenda/myagenda.php //fixed
 
 Pending: Revert to prepared statements if you have time
+
+
+----- Attack ------
+http://localhost:8001/modules/unreguser/unregcours.php?cid=' union select password from eclass.user where user_id = '1
+
+//From work_functions:find_submission
+http://localhost:8001/modules/work/work.php?id=' union select password from eclass.user where user_id = 1 union SELECT id FROM assignment_submit WHERE assignment_id = '1
+
+
 
 ---------CSRF-----------
 modules/profile/profile.php //fixed
