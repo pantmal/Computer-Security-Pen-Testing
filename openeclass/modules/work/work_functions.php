@@ -77,6 +77,7 @@ function work_secret($id)
 {
 	global $currentCourseID, $workPath, $tool_content, $coursePath;
 	
+	$id = intval($id); //BROKEN: Remove intval
 	$res = db_query("SELECT secret_directory FROM assignments WHERE id = '$id'", $currentCourseID);
 	if ($res) {
 		$secret = mysql_fetch_row($res);

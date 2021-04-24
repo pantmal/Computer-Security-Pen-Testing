@@ -181,9 +181,11 @@ if ($is_adminOfCourse) {
 	} elseif (isset($id)) {
 		if (isset($choice)) {
 			if ($choice == 'disable') {
+				$id = intval($id); //BROKEN: Remove intval
 				db_query("UPDATE assignments SET active = '0' WHERE id = '$id'");
 				show_assignments($langAssignmentDeactivated);
 			} elseif ($choice == 'enable') {
+				$id = intval($id); //BROKEN: Remove intval
 				db_query("UPDATE assignments SET active = '1' WHERE id = '$id'");
 				show_assignments($langAssignmentActivated);
 			} elseif ($choice == 'delete') {
@@ -480,6 +482,7 @@ function show_edit_assignment($id, $token)
 	global $urlAppend;
 	global $end_cal_Work_db;
 
+	$id = intval($id); //BROKEN: Remove intval
 	$res = db_query("SELECT * FROM assignments WHERE id = '$id'");
 	$row = mysql_fetch_array($res);
 
@@ -585,6 +588,9 @@ function edit_assignment($id)
 function delete_assignment($id) {
 
 	global $tool_content, $workPath, $currentCourseID, $webDir, $langBack, $langDeleted;
+
+	//BROKEN: Remove intval
+	$id = intval($id);
 
 	$secret = work_secret($id);
 	db_query("DELETE FROM assignments WHERE id='$id'");
@@ -831,6 +837,8 @@ function show_assignment($id, $message = FALSE)
 	global $langEndDeadline, $langWEndDeadline, $langNEndDeadline, $langDays, $langDaysLeft, $langGradeOk;
 	global $currentCourseID, $webDir, $urlServer, $nameTools, $langGraphResults, $m;
 
+	//BROKEN: Remove intval
+	$id = intval($id);
 	$res = db_query("SELECT *, (TO_DAYS(deadline) - TO_DAYS(NOW())) AS days FROM assignments WHERE id = '$id'");
 	$row = mysql_fetch_array($res);
 
