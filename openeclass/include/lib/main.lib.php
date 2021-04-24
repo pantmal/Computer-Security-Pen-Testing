@@ -1211,16 +1211,34 @@ function course_code_to_title($code)
         global $mysqlMainDb;
 
 		//BROKEN
-		// $r = db_query("SELECT intitule FROM cours WHERE code='$code'", $mysqlMainDb);
+		// Remove safe and uncomment the rest
 
-		$safe_code = mysql_real_escape_string($code);
-        $r = db_query("SELECT intitule FROM cours WHERE code='$safe_code'", $mysqlMainDb);
-        if ($r and mysql_num_rows($r) > 0) {
-                $row = mysql_fetch_row($r);
-                return $row[0];
-        } else {
-                return false;
-        }
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		//Create connection
+		$conn = new mysqli('db', 'root', '1234', $mysqlMainDb );
+		$sql = "SELECT intitule FROM cours WHERE code = ? ";
+		$result = $conn->query($sql);
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $code);
+		$stmt->execute();
+		$res = $stmt->get_result(); 
+		
+		if ($res and mysqli_num_rows($res) > 0){
+			$row = mysqli_fetch_row($res);
+            return $row[0];
+		}else{
+			return false;
+		}
+
+		// $safe_code = mysql_real_escape_string($code);
+        // $r = db_query("SELECT intitule FROM cours WHERE code='$safe_code'", $mysqlMainDb);
+        // if ($r and mysql_num_rows($r) > 0) {
+        //         $row = mysql_fetch_row($r);
+        //         return $row[0];
+        // } else {
+        //         return false;
+        // }
 }
 
 
@@ -1228,17 +1246,37 @@ function course_code_to_title($code)
 function course_code_to_id($code)
 {
 		//BROKEN
-		//$r = db_query("SELECT cours_id FROM cours WHERE code='$code'", $mysqlMainDb);
+		//Remove safe and uncomment the rest
 
-        global $mysqlMainDb;
-		$safe_code = mysql_real_escape_string($code);
-        $r = db_query("SELECT cours_id FROM cours WHERE code='$safe_code'", $mysqlMainDb);
-        if ($r and mysql_num_rows($r) > 0) {
-                $row = mysql_fetch_row($r);
-                return $row[0];
-	} else {
-                return false;
-	}
+		global $mysqlMainDb;
+
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		//Create connection
+		$conn = new mysqli('db', 'root', '1234', $mysqlMainDb );
+		$sql = "SELECT cours_id FROM cours WHERE code = ? ";
+		$result = $conn->query($sql);
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $code);
+		$stmt->execute();
+		$res = $stmt->get_result(); 
+		
+		if ($res and mysqli_num_rows($res) > 0){
+			$row = mysqli_fetch_row($res);
+            return $row[0];
+		}else{
+			return false;
+		}
+
+        
+	// 	$safe_code = mysql_real_escape_string($code);
+    //     $r = db_query("SELECT cours_id FROM cours WHERE code='$safe_code'", $mysqlMainDb);
+    //     if ($r and mysql_num_rows($r) > 0) {
+    //             $row = mysql_fetch_row($r);
+    //             return $row[0];
+	// } else {
+    //             return false;
+	// }
 }
 
 function csv_escape($string, $force = false)

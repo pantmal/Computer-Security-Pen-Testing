@@ -88,8 +88,8 @@ function get_agendaitems($query, $month, $year) {
 	// BROKEN
 	// Remove the safes
 
-	$safe_month = mysql_real_escape_string($month);
-	$safe_year = mysql_real_escape_string($year);
+	$safe_month = intval($month);
+	$safe_year = intval($year);
 
 	// get agenda-items for every course
 	while ($mycours = mysql_fetch_array($query))

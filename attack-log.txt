@@ -1,7 +1,8 @@
 
 ---------SQLI-----------
+
 -----Defence-------
-modules/work/work.php: 567 (and some others in work_functions and submit_work) //fixed
+modules/work/work.php: 567 (and some others in work_functions) //fixed
 modules/phpbb/viewtopic.php:89 //fixed
 modules/phpbb/viewforum.php //fixed
 modules/phpbb/newtopic.php:83 (and other lines) //fixed
@@ -12,10 +13,8 @@ include/lib/main.lib.php:1213 (called from unregcourse) //fixed
 include/lib/main.lib.php:1235 (called from admin/editcours) //fixed 
 modules/agenda/myagenda.php //fixed
 
-Pending: Revert to prepared statements if you have time
 
-
------ Attack ------
+-----Attack------
 http://localhost:8001/modules/unreguser/unregcours.php?cid=' union select password from eclass.user where user_id = '1
 
 //From work_functions:find_submission
@@ -41,7 +40,7 @@ modules/units/info.php //fixed
 modules/dropbox/index.php (+ modules/dropbox/dropbox_submit.php) //fixed
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed
 
-Pending: 'harmless' forms, admin forms, auth/courses.php, create_course/create_course.php, url stuff (only if there's time) 
+Pending: 'harmless' forms, admin forms, auth/courses.php, create_course/create_course.php
 
 ---------XSS-----------
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed (csp and escape)
@@ -60,12 +59,9 @@ modules/admin/addfaculte.php //fixed (escape)
 modules/admin/adminannouncements.php //fixed (escape)
 modules/create_course/create_course.php //fixed (escape)
 
-Pending: 'harmless' forms, admin forms
 
 --------RFI------------
 modules/work/work.php //fixed (escape with php2phps)
 modules/dropbox/dropbox_submit.php //fixed (escape with php2phps)
 
 
--------puppies-------
-???

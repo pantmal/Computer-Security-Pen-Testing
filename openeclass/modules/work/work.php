@@ -361,13 +361,31 @@ function submit_work($id) {
 				'$REMOTE_ADDR', '$filename','".$_FILES['userfile']['name'].
 				"', '$stud_comments', '$group_id')", $currentCourseID);
 		} else {
-			// BROKEN: Remove escape
-			$stud_comments_safe = mysql_real_escape_string($stud_comments);
-			db_query("INSERT INTO assignment_submit
-				(uid, assignment_id, submission_date, submission_ip, file_path,
-				file_name, comments) VALUES ('$uid','$id', NOW(), '$REMOTE_ADDR',
-				'$filename','".$_FILES['userfile']['name'].
-				"', '$stud_comments_safe')", $currentCourseID);
+
+			
+			error_reporting(E_ALL);
+			ini_set('display_errors', 1);
+			$date = date("Y-m-d");
+			$conn = new mysqli('db', 'root', '1234', $currentCourseID);
+			$sql = "INSERT INTO assignment_submit
+			(uid, assignment_id, submission_date, submission_ip, file_path, file_name, comments) 
+			VALUES (?, ?, ?, ?, ?, ?, ?)" ;
+			$result = $conn->query($sql);
+			$stmt = $conn->prepare($sql);
+			$stmt->bind_param("iisssss", $uid, $id , $date, $REMOTE_ADDR,
+			$filename, $_FILES['userfile']['name'], $stud_comments );
+			$stmt->execute();
+			
+			$stmt->close();
+			$conn->close();
+
+			// BROKEN: Remove escape and uncomment the rest
+			// $stud_comments_safe = mysql_real_escape_string($stud_comments);
+			// db_query("INSERT INTO assignment_submit
+			// 	(uid, assignment_id, submission_date, submission_ip, file_path,
+			// 	file_name, comments) VALUES ('$uid','$id', NOW(), '$REMOTE_ADDR',
+			// 	'$filename','".$_FILES['userfile']['name'].
+			// 	"', '$stud_comments_safe')", $currentCourseID);
 		}
 
 		$tool_content .="<p class='success_small'>$msg2<br />$msg1<br /><a href='work.php'>$langBack</a></p><br />";
