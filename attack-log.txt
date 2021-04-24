@@ -39,6 +39,12 @@ modules/units/info.php //fixed
 modules/dropbox/index.php (+ modules/dropbox/dropbox_submit.php) //fixed
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed
 modules/forum_admin/forum_admin.php //fixed
+modules/admin/addusertocours.php //fixed (commented)
+modules/admin/cleanup.php //fixed (commented)
+modules/admin/eclassconf.php //fixed (commented)
+modules/admin/mailtoprof.php //fixed (commented)
+modules/admin/quotacours.php //fixed (commented)
+modules/admin/statuscours.php //fixed (commented)
 
 
 ---------XSS-----------
