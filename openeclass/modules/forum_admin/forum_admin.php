@@ -28,6 +28,16 @@
 @last update: 2006-12-19 by Evelthon Prodromou
 */
 
+if (empty($_SESSION['token'])) {
+	if (function_exists('mcrypt_create_iv')) {
+		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+	} else {
+		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+	}
+}
+$token = $_SESSION['token'];
+
+
 $require_current_course = TRUE;
 $require_help = TRUE;
 $helpTopic = 'For';
@@ -80,6 +90,29 @@ function checkrequired(which, entry) {
 
 </script>
 hContent;
+
+
+if ( isset($forumcatadd) and $_POST['token'] !== $token) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+
+if ( isset($forumgoadd) and $_POST['token'] !== $token) {
+
+	header('Location: http://localhost:8001/index.php');
+}
+
+if (isset($forumgosave) and $_POST['token'] !== $token) {
+	
+	header('Location: http://localhost:8001/index.php');
+}
+
+if(isset($forumcatsave) and $_POST['token'] !== $token){
+
+	header('Location: http://localhost:8001/index.php');
+}
+
 	// forum go
 if(isset($forumgo)) { //BROKEN: Remove q at line 94
 	$nameTools = $langAdd;
@@ -147,6 +180,7 @@ if(isset($forumgo)) { //BROKEN: Remove q at line 94
 		<tr><th>&nbsp;</th>
 		<td>
 		<input type=hidden name=cat_id value='$cat_id'>
+		<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
 		<input type=hidden name=forumgoadd value=yes>
 		<input type=submit value=$langAdd>
 		</td>
@@ -194,6 +228,7 @@ if(isset($forumgo)) { //BROKEN: Remove q at line 94
 		$tool_content .= "</select></td></tr>
 		<tr>
 		<th>&nbsp;</th>
+		<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
 		<td><input type=hidden name=forumgosave value=yes>
 		<input type=submit value='$langSave'>
 		</td>
@@ -217,6 +252,7 @@ if(isset($forumgo)) { //BROKEN: Remove q at line 94
     		</tr>
     		<tr>
       		<th>&nbsp;</th>
+			<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
       		<td><input type=submit value='$langSave'></td>
     		</tr>
     		</thead>
@@ -225,13 +261,13 @@ if(isset($forumgo)) { //BROKEN: Remove q at line 94
 	}
 
 	// save forum category
-	elseif (isset($forumcatsave)) { //BROKEN: Remove q's at line 229
+	elseif (isset($forumcatsave) and $_POST['token'] === $token) { //BROKEN: Remove q's at line 229
 		db_query("update catagories set cat_title='".q($cat_title)."' where cat_id='".q($cat_id)."'", $currentCourseID);
 		$tool_content .= "\n<p class=\"success_small\">$langNameCatMod<br /><a href=\"$_SERVER[PHP_SELF]?forumadmin=yes\">$langBack</a></p>";
 	}
 
 	// forum go save
-	elseif(isset($forumgosave)) {
+	elseif(isset($forumgosave) and $_POST['token'] === $token) {
 		$nameTools = $langDelete;
 		$navigation[]= array ("url"=>"../forum_admin/forum_admin.php", "name"=> $langOrganisation);
 		$result = @db_query("SELECT user_id FROM users WHERE username='$forum_moderator'", $currentCourseID);
@@ -247,7 +283,7 @@ if(isset($forumgo)) { //BROKEN: Remove q at line 94
 	}
 
 	// forum add category
-	elseif(isset($forumcatadd)) { //BROKEN: Remove q at line 251
+	elseif(isset($forumcatadd) and $_POST['token'] === $token) { //BROKEN: Remove q at line 251
 		$categories_safe = q($catagories);
 		db_query("INSERT INTO catagories VALUES (NULL, '$categories_safe', NULL)", $currentCourseID);
 		$tool_content .= "\n<p class='success_small'>$langCatAdded<br />
@@ -255,7 +291,7 @@ if(isset($forumgo)) { //BROKEN: Remove q at line 94
 		}
 
 	// forum go add
-	elseif(isset($forumgoadd)) {
+	elseif(isset($forumgoadd) and $_POST['token'] === $token) {
 		$nameTools = $langAdd;
 		$navigation[]= array ("url"=>"../forum_admin/forum_admin.php", "name"=> $langOrganisation);
 		$result = @db_query("SELECT user_id FROM users WHERE username='$forum_moderator'", $currentCourseID);
@@ -373,6 +409,7 @@ if(isset($forumgo)) { //BROKEN: Remove q at line 94
 		<td><input type=text name=catagories size=50 class='FormData_InputText'></td>
 		</tr>
 		<tr><th>&nbsp;</th>
+		<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
 		<td><input type=hidden name=forumcatadd value=yes><input type=submit value='$langAdd'></td>
 		</tr>
 		</thead>

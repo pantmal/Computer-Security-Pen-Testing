@@ -37,6 +37,24 @@ $navigation[]= array ("url"=>"index.php", "name"=> $langAdmin);
 $tool_content = "";
 
 
+// if (empty($_SESSION['token'])) {
+// 	if (function_exists('mcrypt_create_iv')) {
+// 		$_SESSION['token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+// 	} else {
+// 		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+// 	}
+// }
+// $token = $_SESSION['token'];
+
+// if (isset($_POST['submit']) and $_POST['token'] !== $token){
+
+//   header('Location: http://localhost:8001/index.php');
+
+// }
+
+//<input type=\"hidden\" name=\"token\" value=\"$token\"/>	
+
+
 if (isset($_POST['submit'])) {
 	foreach (array('temp' => 2, 'garbage' => 5, 'archive' => 1, 'tmpUnzipping' => 1) as $dir => $days) {
 		$tool_content .= sprintf("<p class=kk>$langCleaningUp</p>", $days,

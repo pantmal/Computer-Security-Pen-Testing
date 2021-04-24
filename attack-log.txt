@@ -21,7 +21,6 @@ http://localhost:8001/modules/unreguser/unregcours.php?cid=' union select passwo
 http://localhost:8001/modules/work/work.php?id=' union select password from eclass.user where user_id = 1 union SELECT id FROM assignment_submit WHERE assignment_id = '1
 
 
-
 ---------CSRF-----------
 modules/profile/profile.php //fixed
 modules/phpbb/editpost.php //fixed
@@ -39,8 +38,8 @@ modules/course_info/infocours.php (+ modules/course_home/course_home.php) //fixe
 modules/units/info.php //fixed
 modules/dropbox/index.php (+ modules/dropbox/dropbox_submit.php) //fixed
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed
+modules/forum_admin/forum_admin.php //fixed
 
-Pending: 'harmless' forms, admin forms, auth/courses.php, create_course/create_course.php
 
 ---------XSS-----------
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed (csp and escape)
