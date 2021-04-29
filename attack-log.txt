@@ -22,6 +22,8 @@ http://localhost:8001/modules/work/work.php?id=' union select password from ecla
 
 
 ---------CSRF-----------
+
+-----Defence-------
 modules/profile/profile.php //fixed
 modules/phpbb/editpost.php //fixed
 modules/phpbb/newtopic.php //fixed
@@ -48,6 +50,8 @@ modules/admin/statuscours.php //fixed (commented)
 
 
 ---------XSS-----------
+
+-----Defence-------
 modules/conference/conference.php (+ modules/conference/messageList.php) //fixed (csp and escape)
 modules/agenda/myagenda.php //fixed (csp)
 modules/course_info/infocours.php //fixed (escape)
@@ -66,7 +70,13 @@ modules/create_course/create_course.php //fixed (escape)
 
 
 --------RFI------------
+
+-----Defence-------
 modules/work/work.php //fixed (escape with php2phps)
 modules/dropbox/dropbox_submit.php //fixed (escape with php2phps)
+
+
+-----Attack------
+Make use of rfi_helper.php to get the password.
 
 
