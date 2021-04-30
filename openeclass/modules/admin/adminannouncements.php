@@ -119,16 +119,16 @@ if (isset($_GET['delete'])) {
                         // modify announcement
                         $id = intval($_POST['id']);
                         db_query("UPDATE admin_announcements
-                                SET gr_title = ".q($title).", gr_body = ".q($newContent).", gr_comment = ".q($comment).",
-                                en_title = ".q($title_en).", en_body = ".q($newContent_en).", en_comment = ".q($comment_en).",
+                                SET gr_title = ".autoquote(q($title)).", gr_body = ".autoquote(q($newContent)).", gr_comment = ".autoquote(q($comment)).",
+                                en_title = ".autoquote(q($title_en)).", en_body = ".autoquote(q($newContent_en)).", en_comment = ".autoquote(q($comment_en)).",
                                 visible = '$visible', date = NOW()
                                 WHERE id = $id", $mysqlMainDb);
                         $message = $langAdminAnnModify;
                 } else {
                         // add new announcement
                         db_query("INSERT INTO admin_announcements
-                                SET gr_title = ".q($title).", gr_body = ".q($newContent).", gr_comment = ".q($comment).",
-                                en_title = ".q($title_en).", en_body = ".q($newContent_en).", en_comment = ".q($comment_en).",
+                                SET gr_title = ".autoquote(q($title)).", gr_body = ".autoquote(q($newContent)).", gr_comment = ".autoquote(q($comment)).",
+                                en_title = ".autoquote(q($title_en)).", en_body = ".autoquote(q($newContent_en)).", en_comment = ".autoquote(q($comment_en)).",
                                 visible = '$visible', date = NOW()");
                         $message = $langAdminAnnAdd;
                 }
