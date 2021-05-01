@@ -1208,7 +1208,7 @@ function ellipsize($string, $maxlen, $postfix = '...')
 // Find the title of a course from its code
 function course_code_to_title($code)
 {
-        global $mysqlMainDb;
+        global $mysqlMainDb, $mysqlServer,$mysqlUser,$mysqlPassword;
 
 		//BROKEN
 		// Remove safe and uncomment the rest
@@ -1216,7 +1216,7 @@ function course_code_to_title($code)
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 		//Create connection
-		$conn = new mysqli('db', 'root', '1234', $mysqlMainDb );
+		$conn = new mysqli($mysqlServer,$mysqlUser,$mysqlPassword, $mysqlMainDb );
 		$sql = "SELECT intitule FROM cours WHERE code = ? ";
 		$result = $conn->query($sql);
 		$stmt = $conn->prepare($sql);
@@ -1248,12 +1248,12 @@ function course_code_to_id($code)
 		//BROKEN
 		//Remove safe and uncomment the rest
 
-		global $mysqlMainDb;
+		global $mysqlMainDb,$mysqlServer,$mysqlUser,$mysqlPassword;
 
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 		//Create connection
-		$conn = new mysqli('db', 'root', '1234', $mysqlMainDb );
+		$conn = new mysqli($mysqlServer,$mysqlUser,$mysqlPassword, $mysqlMainDb );
 		$sql = "SELECT cours_id FROM cours WHERE code = ? ";
 		$result = $conn->query($sql);
 		$stmt = $conn->prepare($sql);

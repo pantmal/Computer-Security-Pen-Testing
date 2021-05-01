@@ -288,7 +288,7 @@ function add_assignment($title, $comments, $desc, $deadline, $group_submissions)
 function submit_work($id) {
 
 	global $tool_content, $workPath, $uid, $stud_comments, $group_sub, $REMOTE_ADDR, $langUploadSuccess,
-	$langBack, $langWorks, $langUploadError, $currentCourseID, $langExerciseNotPermit, $langUnwantedFiletype;
+	$langBack, $langWorks, $langUploadError, $currentCourseID, $langExerciseNotPermit, $langUnwantedFiletype, $mysqlServer,$mysqlUser,	$mysqlPassword;
 
 	//DUKE Work submission bug fix.
 	//Do not allow work submission if:
@@ -366,7 +366,7 @@ function submit_work($id) {
 			error_reporting(E_ALL);
 			ini_set('display_errors', 1);
 			$date = date("Y-m-d");
-			$conn = new mysqli('db', 'root', '1234', $currentCourseID);
+			$conn = new mysqli($mysqlServer, $mysqlUser, $mysqlPassword, $currentCourseID);
 			$sql = "INSERT INTO assignment_submit
 			(uid, assignment_id, submission_date, submission_ip, file_path, file_name, comments) 
 			VALUES (?, ?, ?, ?, ?, ?, ?)" ;
