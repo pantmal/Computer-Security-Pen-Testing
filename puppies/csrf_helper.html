@@ -7,7 +7,7 @@
 
 <h3> Change language form </h3>
 <!-- Switch to whatever different page may use this-->
-<form name="langform" action="http://localhost:8001/index.php" method="get" >
+<form name="langform" action="http://underscorepapakia.csec.chatzi.org/index.php" method="get" >
   <select name='localize' onChange="document.langform.submit();" class='auth_input'>
   <option selected value='el'>Ελληνικά</option>
   <option value='en'>English</option>
@@ -18,7 +18,7 @@
 
 <h3> Login form </h3>
 
-<form action="http://localhost:8001/index.php" method="post">
+<form action="http://underscorepapakia.csec.chatzi.org/index.php" method="post">
   Όνομα χρήστη (username) <br>
   <input class="Login" name="uname" size="20"><br>
   Συνθηματικό (password) <br>
@@ -30,7 +30,7 @@
 
 <h3> Lost password form </h3>
 
-<form method="post" action="http://localhost:8001/modules/auth/lostpass.php">
+<form method="post" action="http://underscorepapakia.csec.chatzi.org/modules/auth/lostpass.php">
   <table>
   <thead>
   <tr><th>Όνομα χρήστη: </th>
@@ -51,7 +51,7 @@
 
 <h3> Search form </h3>
 <!-- Switch to search_incourse.php when in course-->
-<form name="form1" id="form1" method="post" action="http://localhost:8001/modules/search/search.php"> <!-- theme.html -->
+<form name="form1" id="form1" method="post" action="http://underscorepapakia.csec.chatzi.org/modules/search/search.php"> <!-- theme.html -->
   <input type="text" class="key" name="search_terms" size="14">
   <input type="image" name="submit" class="ok" alt="Ok" src="/template/classic/img/go_button.gif">
   <br>
@@ -60,7 +60,7 @@
 
 <h3> Advanced search form </h3>
 
-<form method="post" action="http://localhost:8001/modules/search/search.php">
+<form method="post" action="http://underscorepapakia.csec.chatzi.org/modules/search/search.php">
   <table width="99%">
       <tbody>
   <tr>
@@ -96,7 +96,7 @@
 <br>
 
 <h3> Search in course form</h3>
-<form method="post" action="http://localhost:8001/modules/search/search_incourse.php">
+<form method="post" action="http://underscorepapakia.csec.chatzi.org/modules/search/search_incourse.php">
 	<table width="99%">
     <tbody>
 	<tr>
@@ -137,7 +137,7 @@
 
 <h3> New user form </h3>
 
-<form action="http://localhost:8001/modules/auth/newuser.php" method="post">
+<form action="http://underscorepapakia.csec.chatzi.org/modules/auth/newuser.php" method="post">
 	<table style="border: 1px solid #edecdf;" width="99%">
 	<thead>
 	<tr>
@@ -215,7 +215,7 @@
 
 <h3> New teacher form</h3>
 
-<form action="http://localhost:8001/modules/auth/newprof.php" method="post">
+<form action="http://underscorepapakia.csec.chatzi.org/modules/auth/newprof.php" method="post">
   <table style="border: 1px solid #edecdf;" width="99%">
   <thead>
   <tr>
@@ -286,7 +286,7 @@
 
 <h3> Edit profile form </h3>
 
-<form method="post" action="http://localhost:8001/modules/profile/profile.php?submit=yes"><br>
+<form method="post" action="http://underscorepapakia.csec.chatzi.org/modules/profile/profile.php?submit=yes"><br>
   <table width="99%">
   <tbody><tr>
      <th class="left" width="220">Όνομα</th><td><input class="FormData_InputText" type="text" size="40" name="prenom_form" value="Διαχειριστής"></td></tr>
@@ -325,7 +325,7 @@
 
 <h3> Change password form </h3>
 
-<form method="post" action="http://localhost:8001/modules/profile/password.php?submit=yes&amp;changePass=do">
+<form method="post" action="http://underscorepapakia.csec.chatzi.org/modules/profile/password.php?submit=yes&amp;changePass=do">
   <table width="99%">
   <tbody>
   <tr>
@@ -351,7 +351,7 @@
 
 <h3> Select department form</h3>
 
-<form name='depform' action='http://localhost:8001/modules/auth/courses.php' method='get'>
+<form name='depform' action='http://underscorepapakia.csec.chatzi.org/modules/auth/courses.php' method='get'>
   <div id='operations_container'>
     <ul id='opslist'>
     <li>Επιλογή Σχολής / Τμήματος:&nbsp;
@@ -371,7 +371,7 @@
 
 <h3> Enroll to course form</h3>
 
-<form action='http://localhost:8001/modules/auth/courses.php' method='post'><table width='99%' align='left'><tbody>
+<form action='http://underscorepapakia.csec.chatzi.org/modules/auth/courses.php' method='post'><table width='99%' align='left'><tbody>
   <tr><td><a name='top'> </a>Σχολή / Τμήμα: <b>Τμήμα 1</b>&nbsp;&nbsp;</td></tr>
 </table>
 <p>&nbsp;</p>
@@ -423,7 +423,7 @@
 
 <h3> File submit form</h3>
 
-<form method="post" action="http://localhost:8001/modules/dropbox/dropbox_submit.php" enctype="multipart/form-data" onsubmit="return checkForm(this)">
+<form method="post" action="http://underscorepapakia.csec.chatzi.org/modules/dropbox/dropbox_submit.php" enctype="multipart/form-data" onsubmit="return checkForm(this)">
   <table width='99%' class='FormData'>
   <tbody>
   <tr>
@@ -463,7 +463,7 @@
 
 <h3> Project submit form</h3>
 
-<form enctype="multipart/form-data" action="http://localhost:8001/modules/work/work.php" method="post">
+<form enctype="multipart/form-data" action="http://underscorepapakia.csec.chatzi.org/modules/work/work.php" method="post">
   <input type="hidden" name="id" value="1" />
   <br />
   <table width="99%" align="left" class="FormData">
@@ -491,9 +491,47 @@
 </form>
 <br>
 
+
+<form method="post" action="http://underscorepapakia.csec.chatzi.org/modules/work/work.php">
+  <input type="hidden" name="assignment" value="1">
+  <input type="hidden" name="submission" value="6">
+
+  <table width="99%" class="FormData">
+  <tbody>
+  <tr>
+    <th width="220">&nbsp;</th>
+     <td><b>Προσθήκη σχολίων βαθμολογητή</b></td>
+  </tr>
+  <tr>
+    <th class="left">Όνομα εκπαιδευόμενου :</th>
+    <td>McHacker Hacky </td></tr>
+  <tr>
+    <th class="left">Ημ/νία αποστολής:</th>
+    <td>2021-05-04</td></tr>
+  <tr>
+    <th class="left">Όνομα αρχείου:</th>
+    <td><a href='work.php?get=6'>yoink.php</a></td>
+  </tr>
+  <tr>
+    <th class="left">Βαθμός:</th>
+    <td><input type="text" name="grade" maxlength="3" size="3" value="" class="FormData_InputText"></td>
+  </tr>
+  <tr>
+    <th class="left">Σχόλια βαθμολογητή:</th>
+    <td><textarea cols="60" rows="3" name="comments" class="FormData_InputText"></textarea></td>
+  </tr>
+  <tr>
+    <th class="left">&nbsp;</th>
+    <td><input type="submit" name="grade_comments" value="Καταχώρηση αλλαγών"></td>
+  </tr>
+  </tbody>
+  </table>
+
+  </form>
+
 <h3> New topic form</h3>
 
-<form action='http://localhost:8001/modules/phpbb/newtopic.php' method='post'>
+<form action='http://underscorepapakia.csec.chatzi.org/modules/phpbb/newtopic.php' method='post'>
 	<table class='FormData' width='99%'>
 	<tbody>
 	<tr>
@@ -527,7 +565,7 @@
 
 <h3> Reply to topic form</h3>
 
-<form action='http://localhost:8001/modules/phpbb/reply.php' method='post'>
+<form action='http://underscorepapakia.csec.chatzi.org/modules/phpbb/reply.php' method='post'>
 	<table class="FormData" width="99%">
 	<tbody>
 	<tr>
@@ -539,7 +577,7 @@
 	<table class='xinha_editor'>
 	<tr>
 	<td>
-	<textarea id='xinha' name='message' rows='15' cols='70' class='auth_input'></textarea></td>
+	<textarea id='xinha' name='message' rows='15' cols='70' value="<script> alert(1) </script>" class='auth_input'></textarea></td>
 	</tr></table></td>
 	</tr>
 	<tr>
@@ -558,7 +596,7 @@
 
 <h3> Message form</h3>
 
-<form name='chatForm' action='http://localhost:8001/modules/conference/messageList.php' method='get' target='messageList' onSubmit='return prepare_message();'>
+<form name='chatForm' action='http://underscorepapakia.csec.chatzi.org/modules/conference/messageList.php' method='get' target='messageList' onSubmit='return prepare_message();'>
   <table width='99%' class='FormData'>
   <thead>
   <tr>
@@ -574,7 +612,7 @@
   </tr>
   <tr>
     <th>&nbsp;</th>
-    <!-- <td><iframe frameborder='0' src='http://localhost:8001/modules/conference/messageList.php' width='100%' height='300' name='messageList' style='background: #fbfbfb; border: 1px solid #CAC3B5;'><a href='http://localhost:8001/modules/conference/messageList.php'>Message list</a></iframe></td> -->
+    <!-- <td><iframe frameborder='0' src='http://underscorepapakia.csec.chatzi.org/modules/conference/messageList.php' width='100%' height='300' name='messageList' style='background: #fbfbfb; border: 1px solid #CAC3B5;'><a href='http://underscorepapakia.csec.chatzi.org/modules/conference/messageList.php'>Message list</a></iframe></td> -->
   </tr>
   </thead>
   </table>
@@ -583,7 +621,7 @@
 
 <h3>Create course form (Warning: missing steps!)</h3>
 
-<form method='post' name='createform' action='http://localhost:8001/modules/create_course/create_course.php' onsubmit="return checkrequired(this, 'intitule', 'titulaires');"><table width="99%" align='left' class='FormData'>
+<form method='post' name='createform' action='http://underscorepapakia.csec.chatzi.org/modules/create_course/create_course.php' onsubmit="return checkrequired(this, 'intitule', 'titulaires');"><table width="99%" align='left' class='FormData'>
 	<tbody>
 	<tr>
 	<th width="220">&nbsp;</th>
@@ -638,7 +676,7 @@
 
 <h3>Create Project form</h3>
 
-<form action='http://localhost:8001/modules/work/work.php' method='post' onsubmit='return checkrequired(this, "title");'>
+<form action='http://underscorepapakia.csec.chatzi.org/modules/work/work.php' method='post' onsubmit='return checkrequired(this, "title");'>
   <table width='99%' class='FormData'>
   <tbody>
   <tr>
@@ -665,7 +703,7 @@
   </tr>
   <tr>
     <th class='left'>Προθεσμία υποβολής:</th>
-    <td><input style="width: 100px; color: #840; font-weight:bold; font-size:10px; background-color: #fff; border: 1px dotted #000; text-align: center" name="WorkEnd" value="2021-06-10" id="f-calendar-field-1" type="text" /><a href="#" id="f-calendar-trigger-1"><img align="middle" border="0" src="http://localhost:8001/include/jscalendar/img.gif" alt="" /></a><script type="text/javascript">Calendar.setup({"ifFormat": "%Y-%m-%d","daFormat": "%Y/%m/%d","showsTime":false,"showOthers":true,"timeFormat":24,"inputField": "f-calendar-field-1","button": "f-calendar-trigger-1"});</script></td>
+    <td><input style="width: 100px; color: #840; font-weight:bold; font-size:10px; background-color: #fff; border: 1px dotted #000; text-align: center" name="WorkEnd" value="2021-06-10" id="f-calendar-field-1" type="text" /><a href="#" id="f-calendar-trigger-1"><img align="middle" border="0" src="http://underscorepapakia.csec.chatzi.org/include/jscalendar/img.gif" alt="" /></a><script type="text/javascript">Calendar.setup({"ifFormat": "%Y-%m-%d","daFormat": "%Y/%m/%d","showsTime":false,"showOthers":true,"timeFormat":24,"inputField": "f-calendar-field-1","button": "f-calendar-trigger-1"});</script></td>
   </tr>
   <tr>
     <th class='left'>Τύπος εργασίας:</th>
@@ -683,7 +721,7 @@
 
 <h3> Edit Project form</h3>
 
-<form action="http://localhost:8001/modules/work/work.php" method="post" onsubmit="return checkrequired(this, 'title');">
+<form action="http://underscorepapakia.csec.chatzi.org/modules/work/work.php" method="post" onsubmit="return checkrequired(this, 'title');">
   <input type="hidden" name="id" value="1" />
   <input type="hidden" name="choice" value="do_edit" />
   <table width="99%" class="FormData">
@@ -712,7 +750,7 @@
   </tr>
   <tr>
     <th class="left">Προθεσμία υποβολής:</th>
-    <td><input style="width: 100px; color: #840; font-weight:bold; font-size:10px; background-color: #fff; border: 1px dotted #000; text-align: center" name="WorkEnd" value="2021-05-31" id="f-calendar-field-2" type="text" /><a href="#" id="f-calendar-trigger-2"><img align="middle" border="0" src="http://localhost:8001/include/jscalendar/img.gif" alt="" /></a><script type="text/javascript">Calendar.setup({"ifFormat": "%Y-%m-%d","daFormat": "%Y/%m/%d","showsTime":false,"showOthers":true,"timeFormat":24,"inputField": "f-calendar-field-2","button": "f-calendar-trigger-2"});</script>
+    <td><input style="width: 100px; color: #840; font-weight:bold; font-size:10px; background-color: #fff; border: 1px dotted #000; text-align: center" name="WorkEnd" value="2021-05-31" id="f-calendar-field-2" type="text" /><a href="#" id="f-calendar-trigger-2"><img align="middle" border="0" src="http://underscorepapakia.csec.chatzi.org/include/jscalendar/img.gif" alt="" /></a><script type="text/javascript">Calendar.setup({"ifFormat": "%Y-%m-%d","daFormat": "%Y/%m/%d","showsTime":false,"showOthers":true,"timeFormat":24,"inputField": "f-calendar-field-2","button": "f-calendar-trigger-2"});</script>
     </td>
   </tr>
   <tr>
@@ -730,7 +768,7 @@
 
 <h3> Forum Category edit form </h3>
 
-<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumadmin=yes" method=post></td><tr><td><table width=99% class="ForumCategory">
+<form action="http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumadmin=yes" method=post></td><tr><td><table width=99% class="ForumCategory">
   <tbody>
   <tr><th width='2%'>Α/Α</th>
     <th><div align='left'>Κατηγορίες περιοχών συζητήσεων</div></th>
@@ -743,17 +781,17 @@
       <td><div align='center'>1</div></td>
       <td><a href='forum_admin.php?forumgo=yes&cat_id=2&ctg=Αρχή'>
 <img src='../../template/classic/img/forum_on.gif' border='0' title='Περιοχές Συζητήσεων'></img></a>&nbsp;
-<a href='http://localhost:8001/modules/forum_admin/forum_admin.php?forumcatedit=yes&cat_id=2'>
+<a href='http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumcatedit=yes&cat_id=2'>
 <img src='../../template/classic/img/edit.gif' border='0' title='Αλλαγή'></img></a>&nbsp;
-<a href='http://localhost:8001/modules/forum_admin/forum_admin.php?forumcatdel=yes&cat_id=2&ok=0' onClick='return confirmation();'>
+<a href='http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumcatdel=yes&cat_id=2&ok=0' onClick='return confirmation();'>
 <img src='../../template/classic/img/delete.gif' border='0' title='Διαγραφή'></img></a>
-<a href='http://localhost:8001/modules/forum_admin/forum_admin.php?forumcatnotify=1&cat_id=2'>	
+<a href='http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumcatnotify=1&cat_id=2'>	
 <img src='../../template/classic/img/announcements_off.gif' border='0' title='Ειδοποίηση μέσω email αν σταλούν απαντήσεις'></img></a>
 </td></tr></tbody></table></form><br/>
 
 <h3>New Category form</h3>
 
-<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumcatadd=yes" method=post onsubmit="return checkrequired(this,'catagories');">
+<form action="http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumcatadd=yes" method=post onsubmit="return checkrequired(this,'catagories');">
   <table width=99% class="FormData" align="left">
   <tbody><tr>
   <th width='220'>&nbsp;</th>
@@ -772,7 +810,7 @@
 
 <h3> Forum Category Topic edit form </h3>
 
-<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumgoadd=yes&ctg=Αρχή&cat_id=2" method=post>
+<form action="http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumgoadd=yes&ctg=Αρχή&cat_id=2" method=post>
   <table width=99% class="ForumAdmSum">
   <tbody>
   <tr class="odd">
@@ -798,7 +836,7 @@
 
 <h3> New Category Topic form</h3>
 
-<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumgoadd=yes&ctg=Αρχή&cat_id=2" method=post onsubmit="return checkrequired(this,'forum_name');">
+<form action="http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumgoadd=yes&ctg=Αρχή&cat_id=2" method=post onsubmit="return checkrequired(this,'forum_name');">
   <table width=99% class="FormData" align="left">
   <tbody>
   <tr>
@@ -829,7 +867,7 @@
 
 <h3> General edit Topic Category form</h3>
 
-<form action="http://localhost:8001/modules/forum_admin/forum_admin.php?forumgosave=yes&ctg=Αρχή&cat_id=2" method=post onsubmit="return checkrequired(this,'forum_name');">
+<form action="http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumgosave=yes&ctg=Αρχή&cat_id=2" method=post onsubmit="return checkrequired(this,'forum_name');">
   <input type=hidden name=forum_id value=1>
   <table width=99% class='FormData'>
   <tbody>
@@ -859,7 +897,7 @@
 
 <h3> Edit Category name form</h3>
 
-<form action='http://localhost:8001/modules/forum_admin/forum_admin.php?forumcatsave=yes' method=post onsubmit="return checkrequired(this,'cat_title');">
+<form action='http://underscorepapakia.csec.chatzi.org/modules/forum_admin/forum_admin.php?forumcatsave=yes' method=post onsubmit="return checkrequired(this,'cat_title');">
   <input type=hidden name=cat_id value=2>
   <table width=99% class="FormData">
   <tbody><tr><th width="220">&nbsp;</th>
@@ -880,7 +918,7 @@
 
 <h3>Edit post form</h3>
 
-<form action='http://localhost:8001/modules/phpbb/editpost.php' method='post'>
+<form action='http://underscorepapakia.csec.chatzi.org/modules/phpbb/editpost.php' method='post'>
   <table class='FormData' width='99%'>
   <tbody>
   <tr>
@@ -903,14 +941,14 @@
   <td><input type='checkbox' name='delete' /></td>
   </tr>
   <tr><th>&nbsp;</th><td>
-  <input type='hidden' name='post_id' value='5' />
-  <input type='hidden' name='forum' value='1' />
+  <input type='hidden' name='post_id' value='1' />
+  <input type='hidden' name='forum' value=''' />
   <input type='submit' name='submit' value='Υποβολή' />
   </td></tr>
 </tbody></table></form>
 <br>
 
-<!-- <a href="http://localhost:8001/modules/phpbb/index.php?forumcatnotify=1&cat_id=2">Link check</a> -->
+<!-- <a href="http://underscorepapakia.csec.chatzi.org/modules/phpbb/index.php?forumcatnotify=1&cat_id=2">Link check</a> -->
 <!-- So... admin stuff... links... and iframe trouble... -->
 
 </body>
